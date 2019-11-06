@@ -1,8 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import Setor from './views/Setor.vue';
-
+import Contato from './views/Contato.vue';
 Vue.use(Router);
+
 
 export default new Router({
     mode: 'history',
@@ -13,5 +14,9 @@ export default new Router({
         name: 'Setores',
         component: Setor
       },
-    ]
+      { 
+        path: '/contato',
+        name: 'Contato',
+        component: Contato 
+    }]
 })
