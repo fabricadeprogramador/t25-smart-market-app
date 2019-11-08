@@ -78,7 +78,7 @@ export default {
       },
       {
         title: "Mensagem",
-        icon: "mdi-comment-account",
+        icon: "mdi-chat",
         route: "/mensagem"
       },
 
