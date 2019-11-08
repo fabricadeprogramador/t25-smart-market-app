@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Setor from './views/Setor.vue';
 import Contato from './views/Contato.vue';
+import Mensagem from './views/Mensagem.vue';
 import Carrinho from "./views/Carrinho.vue"
 Vue.use(Router);
 
@@ -18,6 +19,11 @@ export default new Router({
       path: '/contato',
       name: 'Contato',
       component: Contato
+    },
+    {
+      path: '/mensagem',
+      name: 'Mensagem',
+      component: Mensagem
     },
     {
       path: '/carrinho',

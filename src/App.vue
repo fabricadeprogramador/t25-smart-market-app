@@ -76,6 +76,11 @@ export default {
         icon: "mdi-comment-account",
         route: "/contato"
       },
+      {
+        title: "Mensagem",
+        icon: "mdi-comment-account",
+        route: "/mensagem"
+      },
 
       {
         title: "Compras",
