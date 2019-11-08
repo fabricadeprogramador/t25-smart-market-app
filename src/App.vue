@@ -46,9 +46,9 @@ export default {
     drawer: null,
     items: [
       {
-        title: "Home",
-        icon: "mdi-home",
-        route: "/home"
+        title: "Carrinho",
+        icon: "mdi-cart",
+        route: "/carrinho"
       },
       {
         title: "Clientes",
