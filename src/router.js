@@ -30,5 +30,6 @@ export default new Router({
       name: 'Carrinho',
       component: Carrinho
     },
+
   ]
 })

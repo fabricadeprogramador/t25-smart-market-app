@@ -45,53 +45,36 @@ export default {
   data: () => ({
     drawer: null,
     items: [
+       {
+        title: "Setores",
+        icon: "mdi-apps-box",
+        route: "/setores"
+      },
+
       {
         title: "Carrinho",
         icon: "mdi-cart",
         route: "/carrinho"
       },
-      {
-        title: "Clientes",
-        icon: "mdi-account",
-        route: "/clientes"
-      },
 
-      {
-        title: "Produtos",
-        icon: "mdi-basket",
-        route: "/produtos"
-      },
-      {
-        title: "Controle",
-        icon: "mdi-apps-box",
-        route: "/controle"
-      },
       {
         title: "Usuarios",
         icon: "mdi-account-multiple",
         route: "/usuarios"
       },
+
       {
         title: "Contato",
         icon: "mdi-comment-account",
         route: "/contato"
       },
+      
       {
         title: "Mensagem",
         icon: "mdi-chat",
         route: "/mensagem"
       },
-
-      {
-        title: "Compras",
-        icon: "mdi-cart",
-        route: "/compras"
-      },
-      {
-        title: "Setores",
-        icon: "mdi-apps-box",
-        route: "/setores"
-      },
+     
       {
         title: "Sair",
         icon: "mdi-exit-to-app",
