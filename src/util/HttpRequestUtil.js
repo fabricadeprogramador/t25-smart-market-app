@@ -23,14 +23,6 @@ export default {
     return axios.get(API_URL + "/produtos").then(produto => produto.data);
   },
 
-  async editarProduto(produto) {
-    return axios.put(API_URL + "/produtos", produto).then(produto => produto.data)
-  },
-  async adicionarProduto(produto) {
-    return axios
-      .post(API_URL + "/produtos", produto)
-      .then(response => response.data);
-  },
   //Compras
   async buscarCompras() {
     return axios.get(API_URL + "/compras").then(compra => compra.data);
