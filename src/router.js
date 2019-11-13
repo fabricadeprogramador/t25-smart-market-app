@@ -5,6 +5,7 @@ import Contato from './views/Contato.vue';
 import Produto from './views/Produto.vue'
 import Mensagem from './views/Mensagem.vue';
 import Carrinho from "./views/Carrinho.vue"
+import Pagamento from "./views/Pagamento.vue"
 Vue.use(Router);
 
 
@@ -17,6 +18,13 @@ export default new Router({
         name: 'Setores',
         component: Setor
       },
+
+      {
+        path: '/pagamento',
+        name: 'Pagamento',
+        component: Pagamento
+      },
+
       { 
         path: '/contato',
         name: 'Contato',
