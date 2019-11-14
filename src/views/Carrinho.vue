@@ -10,7 +10,7 @@
       <v-card>
         <v-list class="pa-12">
           <v-list-item-title class="text-center">Produtos incluídos no seu carrinho:</v-list-item-title>
-          <v-list-item flat class="title text-center">
+          <v-list-item>
             <v-list-item-title>PRODUTO:</v-list-item-title>
 
             <v-list-item-title>QUANTIDADE:</v-list-item-title>
@@ -20,7 +20,7 @@
             <v-list-item-title>EXCLUIR PRODUTO:</v-list-item-title>
           </v-list-item>
 
-          <v-list-item v-for="item in carrinho" :key="item._id">
+          <v-list-item class v-for="item in carrinho" :key="item._id">
             <v-list-item-avatar>
               <v-img :src="item.imagem"></v-img>
             </v-list-item-avatar>
@@ -72,7 +72,7 @@
       </v-list-item-title>
     </div>
     <div class="my-7 text-center">
-      <v-btn x-large color="success" dark>Finalizar pagamento</v-btn>
+      <v-btn x-large color="success" dark>Continuar compra</v-btn>
     </div>
   </div>
 </template>
@@ -101,6 +101,25 @@ export default {
         descricao: "descricao",
         setor: {
           _id: "5db249855257c64228c09e2f",
+          ativo: true,
+          name: "Frios"
+        }
+      },
+
+      {
+        _id: "5db243494a682b23f094f561",
+        disponivel: false,
+        nome: "Produto 11",
+        marca: "Marca1",
+        valor: 120,
+        quantidade: 10,
+        imagem:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV23Gum3ATjspEkv4XtItsLEkLckfECVmYUo0w_v14oP-7uoQ58w&s",
+        validade: "10-24-2019",
+        __v: 0,
+        descricao: "mamão",
+        setor: {
+          _id: "5db249855257c64228c09e2g",
           ativo: true,
           name: "Frios"
         }
@@ -139,9 +158,9 @@ export default {
     } else {
       let carrinho = JSON.parse(localStorage.getItem("carrinho"));
       this.carrinho = carrinho;
-      for (let i = 0; i < this.carrinho.length; i++) {
-        this.valortotaldoCarrinho += parseFloat(this.carrinho[i].valor);
-      }
+    }
+    for (let i = 0; i < this.carrinho.length; i++) {
+      this.valortotaldoCarrinho += parseFloat(this.carrinho[i].valor);
     }
   }
 };
