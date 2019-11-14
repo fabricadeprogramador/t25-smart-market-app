@@ -1,22 +1,25 @@
 <template>
 <v-row>
         <v-col
-          cols="4"
           v-for="produto in produtos"
           :key="produto.disponivel"
-        >
-        <v-card>
+          >
+          <v-card>
           <v-card-title style="background-image: white">
             <v-row>
-           <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
-      <template v-slot:activator="{ on }">
-          <v-icon color="black" v-on="on">
+
+          <v-dialog v-model="dialog" fullscreen persistent   transition="dialog-bottom-transition">
+
+          <template v-slot:activator="{ on }">
+          <v-btn text icon color="black" v-on="on">
+          <v-icon @click="dialog">
             mdi-chevron-down
           </v-icon>
-        
-      </template>
+          </v-btn>
+          </template>
+
          <v-card>
-        <v-toolbar dark color="primary">
+          <v-toolbar dark color="primary">
           <v-btn icon dark @click="dialog = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
@@ -25,10 +28,11 @@
           <v-toolbar-items>
             <v-btn dark text @click="dialog = false">Save</v-btn>
           </v-toolbar-items>
-        </v-toolbar>
-      </v-card>
-    </v-dialog>
-            </v-row>
+          </v-toolbar>
+          </v-card>
+          </v-dialog>
+
+          </v-row>
           </v-card-title>
 
           <v-card-action>
@@ -48,8 +52,8 @@
                 </v-card-title>
               <p>R$ {{produto.valor.toFixed(2)}}</p>
 
-          </v-card-item>
-      </v-card>  
+            </v-card-item>
+            </v-card>  
         </v-col>
 </v-row>
 </template>
@@ -70,9 +74,22 @@ import HttpRequestUtil from "@/util/HttpRequestUtil";
       }
     },
 
-    mounted(){
-      this.buscarProdutos()
-    }
+      mounted(){
+        this.buscarProdutos()
+        console.log(this.$vuetify.breakpoint)
+      },
+
+    computed: {
+      imageHeight () {
+        switch (this.$vuetify.breakpoint.imagem) {
+          case 'xs': return '220px' 
+          case 'sm': return '400px'
+          case 'md': return '500px'
+          case 'lg': return '600px'
+          case 'xl': return '800px'
+        }
+      },
+    },
   }
 </script>
 
