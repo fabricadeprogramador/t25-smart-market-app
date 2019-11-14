@@ -9,7 +9,14 @@
           v-model="formadepagamento"
         ></v-select>
 
-        <template>
+  <div class="text-center">
+      <v-list-item-title class="title">
+        Valor total da compra :
+        <v-list-item-title>R$: {{valortotaldaCompra}}</v-list-item-title>
+      </v-list-item-title>
+    </div>
+  
+ <template>
 
   <v-row justify="center">
     <v-dialog v-if="formadepagamento == 'Cartão de Crédito'" v-model="dialog" scrollable max-width="350px">
@@ -59,6 +66,10 @@
   export default {
     data: () => ({
 
+      compra:[],
+
+      valortotaldaCompra: 0,
+
       formadepagamento: null,
 
       items: ['Boleto', 'Cartão de Débito', 'Cartão de Crédito', 'PayPal'],
@@ -72,5 +83,19 @@
             this.dialog = false
         }
     },
-  }
+
+    mounted() {
+      if(localStorage.getItem(JSON.parse("carrinho")) == null){
+        localStorage.setItem("carrinho", JSON.stringify(this.compra))
+
+      }
+      else{
+       let compra = JSON.parse(localStorage.getItem("carrinho"));
+      this.compra = compra;
+    }
+    for (let i = 0; i < this.compra.length; i++) {
+      this.valortotaldaCompra += parseFloat(this.compra[i].valor);
+    }
+      }
+    };
 </script>
