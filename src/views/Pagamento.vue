@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row align="center">
-      <v-col class="d-flex" cols="12" sm="6">
+      <v-col class="mx-auto" cols="12" sm="6">
         <v-select
           :items="items"
           filled
