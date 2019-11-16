@@ -1,22 +1,66 @@
 <template>
   <v-container fluid>
     <v-row align="center">
-      <v-col class="d-flex" cols="12" sm="6">
+      <v-col class="mx-auto" cols="12" sm="6">
         <v-select
           :items="items"
           filled
           label="Forma de Pagamento"
           v-model="formadepagamento"
         ></v-select>
+<v-list>
 
-  <div class="text-center">
       <v-list-item-title class="title">
         Valor total da compra :
         <v-list-item-title>R$: {{valortotaldaCompra}}</v-list-item-title>
       </v-list-item-title>
-    </div>
   
+      <v-list-item-title class="title">
+        Valor total das Parcelas :
+        <v-list-item-title>R$: {{valordasParcelas}}</v-list-item-title>
+      </v-list-item-title>
+
+      <v-list-item-title class="title">
+        Quantidade de Parcelas :
+        <v-list-item-title>{{qtdParcelas}}x</v-list-item-title>
+      </v-list-item-title>
+
+      <div class="text-center">
+
+    <v-btn
+      :disabled="dialog1"
+      :loading="dialog1"
+      class="white--text"
+      color="purple darken-2"
+      @click="dialog1 = true"
+    >
+      Processar Pagamento
+    </v-btn>
+    <v-dialog
+      v-model="dialog1"
+      hide-overlay
+      persistent
+      width="300"
+    >
+      <v-card
+        color="primary"
+        dark
+      >
+        <v-card-text>
+          Por favor, aguarde...
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+  </div>
+</v-list>
  <template>
+
+   
 
   <v-row justify="center">
     <v-dialog v-if="formadepagamento == 'Cartão de Crédito'" v-model="dialog" scrollable max-width="350px">
@@ -28,17 +72,20 @@
         <v-divider></v-divider>
         <v-card-text style="height: 300px;">
           <v-radio-group v-model="dialogm1" column>
-            <v-radio label="1x - " value="1x"></v-radio>
-            <v-radio label="2x - " value="2x"></v-radio>
-            <v-radio label="3x - " value="3x"></v-radio>
-            <v-radio label="4x - " value="4x"></v-radio>
-            <v-radio label="5x - " value="5x"></v-radio>
+            <v-radio label="1x - " value=1></v-radio>
+            <v-radio label="2x - " value=2></v-radio>
+            <v-radio label="3x - " value=3></v-radio>
+            <v-radio label="4x - " value=4></v-radio>
+            <v-radio label="5x - " value=5></v-radio>
           </v-radio-group>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn color="blue darken-1" text @click="fechardialog">Fechar</v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">Salvar</v-btn>
+          <v-btn color="blue darken-1" text @click="calcularParcelas(
+
+
+          )">Salvar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -52,23 +99,22 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        dialogm1: '',
-        dialog: false,
-      }
-    },
-  }
-</script>
 
-<script>
   export default {
     data: () => ({
 
+
+        dialogm1: 0,
+        dialog: false,
+        dialog1: false,
+
       compra:[],
 
+      qtdParcelas: 0,
+
       valortotaldaCompra: 0,
+
+      valordasParcelas: 0,
 
       formadepagamento: null,
 
@@ -76,12 +122,32 @@
      
     }),
 
+    watch: {
+      dialog1 (val) {
+        if (!val) return
+
+        setTimeout(() => (this.dialog1 = false), 4000)
+      },
+
+    },
+
     methods: {
 
         fechardialog(){
             this.formadepagamento = null
             this.dialog = false
+        },
+
+        calcularParcelas(){
+          if(this.formadepagamento == 'Cartão de Crédito' && this.dialogm1 > 0 ){
+
+            this.valordasParcelas = this.valortotaldaCompra/this.dialogm1 
+            this.qtdParcelas = this.dialogm1
+            this.dialog = false
+          }
         }
+
+
     },
 
     mounted() {
@@ -98,4 +164,5 @@
     }
       }
     };
+    
 </script>
