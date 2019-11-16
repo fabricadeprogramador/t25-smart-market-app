@@ -85,7 +85,7 @@
     },
 
     mounted() {
-      if(localStorage.getItem(JSON.parse("carrinho")) == null){
+      if(localStorage.getItem("carrinho") == null){
         localStorage.setItem("carrinho", JSON.stringify(this.compra))
 
       }

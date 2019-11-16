@@ -8,7 +8,7 @@
 
     <div class="ma-12 elevation-1">
       <v-card>
-        <v-list class="pa-12">
+        <v-list class="pa-12 sm-12" >
           <v-list-item-title class="text-center">Produtos incluídos no seu carrinho:</v-list-item-title>
           <v-list-item>
             <v-list-item-title>PRODUTO:</v-list-item-title>
