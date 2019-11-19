@@ -7,8 +7,8 @@
     </div>
 
     <div class="ma-12 elevation-1">
-      <v-card>
-        <v-list class="pa-12 sm-12" >
+      <v-card >
+        <v-list class="pa-12 " >
           <v-list-item-title class="text-center">Produtos incluídos no seu carrinho:</v-list-item-title>
           <v-list-item>
             <v-list-item-title>PRODUTO:</v-list-item-title>
@@ -17,7 +17,7 @@
 
             <v-list-item-title>VALOR:</v-list-item-title>
 
-            <v-list-item-title>EXCLUIR PRODUTO:</v-list-item-title>
+            <v-list-item-title>EXCLUIR:</v-list-item-title>
           </v-list-item>
 
           <v-list-item class v-for="item in carrinho" :key="item._id">
@@ -72,7 +72,7 @@
       </v-list-item-title>
     </div>
     <div class="my-7 text-center">
-      <v-btn x-large color="success" dark>Continuar compra</v-btn>
+      <v-btn x-large color="success" dark @click="finalizarCompra()">Finalizar compra</v-btn>
     </div>
   </div>
 </template>
@@ -131,6 +131,10 @@ export default {
     mostrarDialog(item) {
       this.produtoExcluido = item;
       this.dialog = true;
+    },
+
+    finalizarCompra(){
+      this.$router.push("/pagamento")
     },
 
     deletarProduto() {

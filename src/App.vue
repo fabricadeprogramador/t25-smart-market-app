@@ -51,6 +51,11 @@ export default {
         route: "/setores"
       },
 
+ {
+        title: "Produtos",
+        icon: "mdi-basket",
+        route: "/produtos"
+      },
       {
         title: "Pagamento",
         icon: "mdi-apps-box",
