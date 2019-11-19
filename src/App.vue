@@ -85,48 +85,42 @@ export default {
     username: "",
     password: "",
     items: [
-      {
-        title: "Home",
-        icon: "mdi-home",
-        route: "/home"
-      },
-      {
-        title: "Clientes",
-        icon: "mdi-account",
-        route: "/clientes"
+       {
+        title: "Setores",
+        icon: "mdi-apps-box",
+        route: "/setores"
       },
 
       {
-        title: "Produtos",
-        icon: "mdi-basket",
-        route: "/produtos"
-      },
-      {
-        title: "Controle",
+        title: "Pagamento",
         icon: "mdi-apps-box",
-        route: "/controle"
+        route: "/pagamento"
       },
+
+      {
+        title: "Carrinho",
+        icon: "mdi-cart",
+        route: "/carrinho"
+      },
+
       {
         title: "Usuarios",
         icon: "mdi-account-multiple",
         route: "/usuarios"
       },
+
       {
         title: "Contato",
         icon: "mdi-comment-account",
         route: "/contato"
       },
-
+      
       {
-        title: "Compras",
-        icon: "mdi-cart",
-        route: "/compras"
+        title: "Mensagem",
+        icon: "mdi-chat",
+        route: "/mensagem"
       },
-      {
-        title: "Setores",
-        icon: "mdi-apps-box",
-        route: "/setores"
-      },
+     
       {
         title: "Sair",
         icon: "mdi-exit-to-app",

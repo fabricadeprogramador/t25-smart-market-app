@@ -2,6 +2,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Setor from './views/Setor.vue';
 import Contato from './views/Contato.vue';
+import Produto from './views/Produto.vue'
+import Mensagem from './views/Mensagem.vue';
+import Carrinho from "./views/Carrinho.vue"
+import Pagamento from "./views/Pagamento.vue"
 Vue.use(Router);
 
 
@@ -14,9 +18,33 @@ export default new Router({
         name: 'Setores',
         component: Setor
       },
+
+      {
+        path: '/pagamento',
+        name: 'Pagamento',
+        component: Pagamento
+      },
+
       { 
         path: '/contato',
         name: 'Contato',
         component: Contato 
-    }]
+    },
+    {
+      path: '/produtos',
+      name: 'Produto',
+      component: Produto
+    },
+    {
+      path: '/mensagem',
+      name: 'Mensagem',
+      component: Mensagem
+    },
+    {
+      path: '/carrinho',
+      name: 'Carrinho',
+      component: Carrinho
+    },
+
+  ]
 })

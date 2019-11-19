@@ -23,14 +23,6 @@ export default {
     return axios.get(API_URL + "/produtos").then(produto => produto.data);
   },
 
-  async editarProduto(produto) {
-    return axios.put(API_URL + "/produtos", produto).then(produto => produto.data)
-  },
-  async adicionarProduto(produto) {
-    return axios
-      .post(API_URL + "/produtos", produto)
-      .then(response => response.data);
-  },
   //Compras
   async buscarCompras() {
     return axios.get(API_URL + "/compras").then(compra => compra.data);
@@ -47,14 +39,14 @@ export default {
       .then(response => response.data);
   },
 
-  //Contato
-  async buscarContatos() {
+  //Contato Buscar
+  async buscarResposta() {
     return axios.get(API_URL + "/contato").then(contato => contato.data);
   },
 
-  //Contato Salvar
-  async salvarResposta(item) {
-    return axios.put(API_URL + "/contato", item).then(contato => contato.data);
+  //Contato Adicionar
+  async salvarContato(contato) {
+    return axios.post(API_URL + "/contato", contato).then(contato => contato.data);
   },
 
   //Login
