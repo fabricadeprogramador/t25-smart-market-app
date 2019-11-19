@@ -19,6 +19,7 @@
             <v-list-item-title>{{qtdParcelas}}x</v-list-item-title>
           </v-list-item-title>
 
+          <template>
           <div class="text-center">
             <v-btn
               :disabled="dialog1"
@@ -27,7 +28,9 @@
               color="purple darken-2"
               @click="dialog1 = true"
             >Processar Pagamento</v-btn>
-            <v-dialog v-model="dialog1" hide-overlay persistent width="300">
+            <v-dialog v-model="dialog1" hide-overlay persistent width="300"
+              v-if="selecPagamento"
+            >
               <v-card color="primary" dark>
                 <v-card-text>
                   Por favor, aguarde...
@@ -36,6 +39,7 @@
               </v-card>
             </v-dialog>
           </div>
+          </template>
         </v-list>
         <template>
           <v-row justify="center">
@@ -63,24 +67,23 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                   <v-btn color="blue darken-1" text @click="fechardialog">Fechar</v-btn>
-                  <v-btn color="blue darken-1" text @click="calcularParcelas(
-
-
-          )">Salvar</v-btn>
+                  <v-btn color="blue darken-1" text @click="calcularParcelas()">Salvar</v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
           </v-row>
         </template>
-      </v-col>
-    </v-row>
-  </v-container>
+
+        <template>
+  <div>
+    <v-alert type="warning" v-model="alertaPag">
+      Selecione uma forma de Pagamento
+    </v-alert>
+  </div>
 </template>
       </v-col>
     </v-row>
   </v-container>
-
-  
 </template>
 
 <script>
@@ -89,6 +92,7 @@ export default {
     dialogm1: 0,
     dialog: false,
     dialog1: false,
+    alertaPag: false,
 
     compra: [],
 
@@ -106,9 +110,9 @@ export default {
       dialog1(val) {
         if (!val) return;
 
-        setTimeout(() => (this.dialog1 = false), 4000);
-      }
-    }
+        setTimeout(() => (this.dialog1 = false), 4000)
+      },
+    },
   }),
 
   methods: {
@@ -122,6 +126,12 @@ export default {
         this.valordasParcelas = this.valortotaldaCompra / this.dialogm1;
         this.qtdParcelas = this.dialogm1;
         this.dialog = false;
+      } 
+    },
+
+    selecPagamento(){
+      if (this.formadepagamento == null){
+        this.alertaPag = true;
       }
     }
   },
