@@ -15,12 +15,12 @@
         <v-list-item-title>R$: {{valortotaldaCompra}}</v-list-item-title>
       </v-list-item-title>
   
-      <v-list-item-title class="title">
+      <v-list-item-title class="title" v-if="formadepagamento == 'Cartão de Crédito'">
         Valor total das Parcelas :
         <v-list-item-title>R$: {{valordasParcelas}}</v-list-item-title>
       </v-list-item-title>
 
-      <v-list-item-title class="title">
+      <v-list-item-title class="title" v-if="formadepagamento == 'Cartão de Crédito'">
         Quantidade de Parcelas :
         <v-list-item-title>{{qtdParcelas}}x</v-list-item-title>
       </v-list-item-title>
