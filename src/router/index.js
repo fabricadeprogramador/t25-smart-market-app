@@ -6,7 +6,11 @@ import Carrinho from '../views/Carrinho.vue'
 Vue.use(VueRouter)
 
 const routes = [
- 
+  {
+    path: '/',
+    name: 'home',
+    component: Home
+  },
 
   {
     path: "/carrinho",
