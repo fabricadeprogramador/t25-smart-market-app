@@ -56,11 +56,7 @@ export default {
         icon: "mdi-basket",
         route: "/produtos"
       },
-      {
-        title: "Pagamento",
-        icon: "mdi-apps-box",
-        route: "/pagamento"
-      },
+     
 
       {
         title: "Carrinho",
