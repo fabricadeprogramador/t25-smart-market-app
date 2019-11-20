@@ -72,7 +72,7 @@
       </v-list-item-title>
     </div>
     <div class="my-7 text-center">
-      <v-btn x-large color="success" dark>Continuar compra</v-btn>
+      <v-btn x-large color="success" dark @click="finalizarCompra()">Finalizar compra</v-btn>
     </div>
   </div>
 </template>
@@ -131,6 +131,10 @@ export default {
     mostrarDialog(item) {
       this.produtoExcluido = item;
       this.dialog = true;
+    },
+
+    finalizarCompra(){
+      this.$router.push("/pagamento")
     },
 
     deletarProduto() {
