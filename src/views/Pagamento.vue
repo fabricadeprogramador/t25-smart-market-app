@@ -76,8 +76,8 @@
 
         <template>
   <div>
-    <v-alert type="warning" v-model="alertaPag">
-      Selecione uma forma de Pagamento
+    <v-alert type="warning" v-if="alertaPag">
+      Selecione uma forma de Pagamento!
     </v-alert>
   </div>
 </template>
@@ -106,14 +106,15 @@ export default {
 
     formadepagamento: null,
 
-    watch: {
+  }),
+
+  watch: {
       dialog1(val) {
         if (!val) return;
 
         setTimeout(() => (this.dialog1 = false), 4000)
-      },
+      }
     },
-  }),
 
   methods: {
     fechardialog() {
@@ -130,8 +131,10 @@ export default {
     },
 
     selecPagamento(){
+      
       if (this.formadepagamento == null){
         this.alertaPag = true;
+        return;
       }
     }
   },
