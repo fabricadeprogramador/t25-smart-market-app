@@ -19,30 +19,24 @@
             <v-list-item-title>{{qtdParcelas}}x</v-list-item-title>
           </v-list-item-title>
 
-          
-
-
           <template>
-
-          <div class="text-center">
-            <v-btn
-              :disabled="dialog1"
-              :loading="dialog1"
-              class="white--text"
-              color="purple darken-2"
-              @click="dialog1 = true"
-            >Processar Pagamento</v-btn>
-            <v-dialog v-model="dialog1" hide-overlay persistent width="300"
-              v-if="selecPagamento"
-            >
-              <v-card color="primary" dark>
-                <v-card-text>
-                  Por favor, aguarde...
-                  <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
-                </v-card-text>
-              </v-card>
-            </v-dialog>
-          </div>
+            <div class="text-center">
+              <v-btn
+                :disabled="dialog1"
+                :loading="dialog1"
+                class="white--text"
+                color="purple darken-2"
+                @click="dialog1 = true"
+              >Processar Pagamento</v-btn>
+              <v-dialog v-model="dialog1" hide-overlay persistent width="300" v-if="selecPagamento">
+                <v-card color="primary" dark>
+                  <v-card-text>
+                    Por favor, aguarde...
+                    <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+                  </v-card-text>
+                </v-card>
+              </v-dialog>
+            </div>
           </template>
         </v-list>
         <template>
@@ -79,12 +73,16 @@
         </template>
 
         <template>
-  <div>
-    <v-alert type="warning" v-model="alertaPag">
-      Selecione uma forma de Pagamento
-    </v-alert>
-  </div>
+          <div>
+            <v-alert type="warning" v-model="alertaPag">Selecione uma forma de Pagamento</v-alert>
+          </div>
+        </template>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
+
+
 
 
 <script>
@@ -106,15 +104,16 @@ export default {
     valordasParcelas: 0,
 
     formadepagamento: null,
+  }),
 
     watch: {
       dialog1(val) {
         if (!val) return;
 
-        setTimeout(() => (this.dialog1 = false), 4000)
-      },
+        setTimeout(() => (this.dialog1 = false), 4000);
+      }
     },
-  }),
+  
 
   methods: {
     fechardialog() {
@@ -127,11 +126,11 @@ export default {
         this.valordasParcelas = this.valortotaldaCompra / this.dialogm1;
         this.qtdParcelas = this.dialogm1;
         this.dialog = false;
-      } 
+      }
     },
 
-    selecPagamento(){
-      if (this.formadepagamento == null){
+    selecPagamento() {
+      if (this.formadepagamento == null) {
         this.alertaPag = true;
       }
     }
