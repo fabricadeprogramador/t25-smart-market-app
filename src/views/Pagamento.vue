@@ -20,6 +20,7 @@
           </v-list-item-title>
 
           <template>
+<<<<<<< HEAD
             <div class="text-center">
               <v-btn
                 :disabled="dialog1"
@@ -28,6 +29,12 @@
                 color="purple darken-2"
                 @click="dialog1 = true"
               >Processar Pagamento</v-btn>
+=======
+
+            <div class="text-center">
+              <v-btn :disabled="dialog1" :loading="dialog1" class="white--text" color="purple darken-2"
+                @click="dialog1 = true">Processar Pagamento</v-btn>
+>>>>>>> 103534032d1e4cf4d5f831e783461ccf2263902c
               <v-dialog v-model="dialog1" hide-overlay persistent width="300" v-if="selecPagamento">
                 <v-card color="primary" dark>
                   <v-card-text>
@@ -41,12 +48,7 @@
         </v-list>
         <template>
           <v-row justify="center">
-            <v-dialog
-              v-if="formadepagamento == 'Cartão de Crédito'"
-              v-model="dialog"
-              scrollable
-              max-width="350px"
-            >
+            <v-dialog v-if="formadepagamento == 'Cartão de Crédito'" v-model="dialog" scrollable max-width="350px">
               <template v-slot:activator="{ on }">
                 <v-btn color="primary" dark v-on="on">Parcelas</v-btn>
               </template>
@@ -74,11 +76,20 @@
 
         <template>
           <div>
+<<<<<<< HEAD
             <v-alert type="warning" v-model="alertaPag">Selecione uma forma de Pagamento</v-alert>
           </div>
         </template>
       </v-col>
     </v-row>
+=======
+            <v-alert type="warning" v-model="alertaPag">
+              Selecione uma forma de Pagamento
+            </v-alert>
+          </div>
+        </template>
+
+>>>>>>> 103534032d1e4cf4d5f831e783461ccf2263902c
   </v-container>
 </template>
 
@@ -86,66 +97,86 @@
 
 
 <script>
-export default {
-  data: () => ({
-    dialogm1: 0,
-    dialog: false,
-    dialog1: false,
-    alertaPag: false,
+  export default {
+    data: () => ({
+      dialogm1: 0,
+      dialog: false,
+      dialog1: false,
+      alertaPag: false,
 
-    compra: [],
+      compra: [],
 
-    items: ["Boleto", "Cartão de Débito", "Cartão de Crédito", "Paypal"],
+      items: ["Boleto", "Cartão de Débito", "Cartão de Crédito", "Paypal"],
 
-    qtdParcelas: 0,
+      qtdParcelas: 0,
 
-    valortotaldaCompra: 0,
+      valortotaldaCompra: 0,
 
-    valordasParcelas: 0,
+      valordasParcelas: 0,
 
+<<<<<<< HEAD
     formadepagamento: null,
   }),
+=======
+      formadepagamento: null,
+>>>>>>> 103534032d1e4cf4d5f831e783461ccf2263902c
 
-    watch: {
-      dialog1(val) {
-        if (!val) return;
+      watch: {
+        dialog1(val) {
+          if (!val) return;
 
+<<<<<<< HEAD
         setTimeout(() => (this.dialog1 = false), 4000);
       }
     },
   
+=======
+          setTimeout(() => (this.dialog1 = false), 4000)
+        },
+      },
+    }),
+>>>>>>> 103534032d1e4cf4d5f831e783461ccf2263902c
 
-  methods: {
-    fechardialog() {
-      this.formadepagamento = null;
-      this.dialog = false;
-    },
-
-    calcularParcelas() {
-      if (this.formadepagamento == "Cartão de Crédito" && this.dialogm1 > 0) {
-        this.valordasParcelas = this.valortotaldaCompra / this.dialogm1;
-        this.qtdParcelas = this.dialogm1;
+    methods: {
+      fechardialog() {
+        this.formadepagamento = null;
         this.dialog = false;
+<<<<<<< HEAD
       }
     },
 
     selecPagamento() {
       if (this.formadepagamento == null) {
         this.alertaPag = true;
+=======
+      },
+
+      calcularParcelas() {
+        if (this.formadepagamento == "Cartão de Crédito" && this.dialogm1 > 0) {
+          this.valordasParcelas = this.valortotaldaCompra / this.dialogm1;
+          this.qtdParcelas = this.dialogm1;
+          this.dialog = false;
+        }
+      },
+
+      selecPagamento() {
+        if (this.formadepagamento == null) {
+          this.alertaPag = true;
+        }
+      }
+    },
+
+    mounted() {
+      if (localStorage.getItem("carrinho") == null) {
+        localStorage.setItem("carrinho", JSON.stringify(this.compra));
+      } else {
+        let compra = JSON.parse(localStorage.getItem("carrinho"));
+        this.compra = compra;
+      }
+      for (let i = 0; i < this.compra.length; i++) {
+        this.valortotaldaCompra += parseFloat(this.compra[i].valor);
+>>>>>>> 103534032d1e4cf4d5f831e783461ccf2263902c
       }
     }
-  },
-
-  mounted() {
-    if (localStorage.getItem("carrinho") == null) {
-      localStorage.setItem("carrinho", JSON.stringify(this.compra));
-    } else {
-      let compra = JSON.parse(localStorage.getItem("carrinho"));
-      this.compra = compra;
-    }
-    for (let i = 0; i < this.compra.length; i++) {
-      this.valortotaldaCompra += parseFloat(this.compra[i].valor);
-    }
-  }
-};
+  };
 </script>
