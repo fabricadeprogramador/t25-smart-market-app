@@ -97,6 +97,7 @@ export default {
         icon: "mdi-account",
         route: "/clientes"
       },
+     
 
       {
         title: "Produtos",
