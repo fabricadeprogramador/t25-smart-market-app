@@ -7,8 +7,8 @@
     </div>
 
     <div class="ma-12 elevation-1">
-      <v-card >
-        <v-list class="pa-12 " >
+      <v-card>
+        <v-list class="pa-12">
           <v-list-item-title class="text-center">Produtos incluídos no seu carrinho:</v-list-item-title>
           <v-list-item>
             <v-list-item-title>PRODUTO:</v-list-item-title>
@@ -133,8 +133,13 @@ export default {
       this.dialog = true;
     },
 
-    finalizarCompra(){
-      this.$router.push("/pagamento")
+    finalizarCompra() {
+      this.$router.push("/pagamento");
+      // if (localStorage.getItem("Logado") != null) {
+
+      // } else {
+      //   alert("você precisa estar logado pra finalizar à compra")
+      // }
     },
 
     deletarProduto() {
