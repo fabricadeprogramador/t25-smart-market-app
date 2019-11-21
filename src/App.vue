@@ -1,6 +1,5 @@
 <template>
-  <v-app id="keep" v-if="true">
-    
+  <v-app id="keep" v-if="logado">
     <v-app-bar app clipped-left color="amber">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <span class="title ml-3 mr-5">
@@ -9,6 +8,7 @@
       </span>
 
       <v-spacer></v-spacer>
+      <v-icon @click="logout">mdi-exit-to-app</v-icon>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app clipped color="grey lighten-4">
@@ -76,6 +76,7 @@
 </template>
 
 <script>
+import HttpRequestUtil from "@/util/HttpRequestUtil";
 export default {
   props: {
     source: String
@@ -84,68 +85,102 @@ export default {
     drawer: null,
     username: "",
     password: "",
+    logado: false,
     items: [
-       {
-        title: "Setores",
-        icon: "mdi-apps-box",
-        route: "/setores"
+      {
+        title: "Home",
+        icon: "mdi-home",
+        route: "/home"
+      },
+      {
+        title: "Clientes",
+        icon: "mdi-account",
+        route: "/clientes"
       },
 
       {
-        title: "Pagamento",
-        icon: "mdi-apps-box",
-        route: "/pagamento"
+        title: "Produtos",
+        icon: "mdi-basket",
+        route: "/produtos"
       },
-
       {
-        title: "Carrinho",
-        icon: "mdi-cart",
-        route: "/carrinho"
+        title: "Controle",
+        icon: "mdi-apps-box",
+        route: "/controle"
       },
-
       {
         title: "Usuarios",
         icon: "mdi-account-multiple",
         route: "/usuarios"
       },
-
       {
         title: "Contato",
         icon: "mdi-comment-account",
         route: "/contato"
       },
-      
+
       {
-        title: "Mensagem",
-        icon: "mdi-chat",
-        route: "/mensagem"
+        title: "Compras",
+        icon: "mdi-cart",
+        route: "/compras"
       },
-     
       {
-        title: "Sair",
-        icon: "mdi-exit-to-app",
-        route: "/"
-      },
+        title: "Setores",
+        icon: "mdi-apps-box",
+        route: "/setores"
+      }
     ]
   }),
   methods: {
-    autenticar(){
+    autenticar() {
       let usuario = {};
       usuario.username = this.username;
       usuario.senha = this.password;
       usuario.tipo = "CLIENTE";
 
-      HttpRequestUtil.autenticar(usuario).then(usuario => {
-        if (usuario == "Usuário ou senha inválidos!") {
-          alert("usuário invalido");
+      HttpRequestUtil.autenticar(usuario).then(usuarioAut => {
+        if (JSON.stringify(usuarioAut[0]) != undefined) {
+          if (
+            usuarioAut[0].username == usuario.username &&
+            usuarioAut[0].senha == usuario.senha &&
+            usuarioAut[0].tipo == usuario.tipo
+          ) {
+            this.buscarClientePorUsuario(usuarioAut[0]._id);
+          }
         } else {
-          localStorage.setItem("Logado", JSON.stringify(usuario[0]));
-          alert("Usuário Logado com sucesso!");
-          this.$router.push("/");
+          alert("Usuário e/ou senha inválidos");
         }
       });
+    },
+    buscarClientePorUsuario(idusuario) {
+      let cliente = {};
+      cliente.usuario = idusuario;
+      
+      HttpRequestUtil.buscarClientePorUsuario(cliente).then(clienteAut => {
+      alert('APP' + JSON.stringify(clienteAut));
+        localStorage.setItem("clienteLogado", JSON.stringify(clienteAut[0]));
+        this.logado = true;
+      });
+    },
+
+    logout() {
+      localStorage.removeItem("clienteLogado");
+      this.logado = false;      
+    },
+    
+    buscarUsuarioLS() {
+      let lsUsuario = null;
+      lsUsuario = localStorage.getItem("clienteLogado");
+      if (lsUsuario == null) {
+        this.logado = false;
+      } else {
+        this.logado = true;
+      }
     }
   },
+  mounted() {
+    this.buscarUsuarioLS();
+  }
 };
 </script>
 <style>
