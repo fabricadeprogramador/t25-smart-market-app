@@ -89,7 +89,7 @@ export default {
       {
         title: "Sair",
         icon: "mdi-exit-to-app",
-        route: "/"
+        route: "/sair"
       },
     ]
   })
