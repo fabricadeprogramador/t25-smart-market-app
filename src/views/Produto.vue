@@ -33,11 +33,11 @@
                   <v-spacer></v-spacer>
                 </v-toolbar>
 
-                <div class="detalhes">
+                <div class="detalhes" >
                   <v-img
                     max-width="200px"
                     :src="produtoSelecionado.imagem"
-                    class="imagem-detalhe"
+                    class="d-flex child-flex"
                     gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,0)"
                     height="200px"
                   >
@@ -121,9 +121,9 @@ export default {
 
 }
 .imagem-detalhe{
-  margin-top: 5%; 
+  
   padding: 20px;
-  margin: auto;
+  
   border: 1px solid black
 }
 .dados {
