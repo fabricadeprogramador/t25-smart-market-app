@@ -1,6 +1,5 @@
 <template>
-  <v-app id="keep">
-    <router-link to='/login'>Login</router-link>
+  <v-app id="keep" v-if="logado">
     <v-app-bar app clipped-left color="amber">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
       <span class="title ml-3 mr-5">
@@ -9,6 +8,7 @@
       </span>
 
       <v-spacer></v-spacer>
+      <v-icon @click="logout">mdi-exit-to-app</v-icon>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app clipped color="grey lighten-4">
@@ -26,7 +26,6 @@
     </v-navigation-drawer>
 
     <v-content>
-      
       <router-view />
     </v-content>
 
@@ -35,33 +34,165 @@
       <div>Fábrica de Programador - High Tech Cursos&copy; {{ new Date().getFullYear() }}</div>
     </v-footer>
   </v-app>
+
+  <v-app v-else>
+    <v-container class="fill-height" fluid>
+      <v-row align="center" justify="center">
+        <v-col cols="12" sm="8" md="4">
+          <v-card class="elevation-12">
+            <v-toolbar color="amber" flat>
+              <v-toolbar-title>Login Market</v-toolbar-title>
+              <div class="flex-grow-1"></div>
+            </v-toolbar>
+            <v-card-text>
+              <v-form>
+                <v-text-field label="Username" v-model="username" prepend-icon="mdi-account" type="text" color="amber">
+                </v-text-field>
+
+                <v-text-field id="password" label="Password" v-model="password" prepend-icon="mdi-lock" type="password"
+                  color="amber"></v-text-field>
+              </v-form>
+            </v-card-text>
+            <v-card-actions>
+              <div class="flex-grow-1"></div>
+              <v-btn color="amber" @click="autenticar">Login</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
+<<<<<<< HEAD
+import HttpRequestUtil from "@/util/HttpRequestUtil";
 export default {
   props: {
     source: String
   },
   data: () => ({
     drawer: null,
+    username: "",
+    password: "",
+    logado: false,
     items: [
-       {
-        title: "Setores",
-        icon: "mdi-apps-box",
-        route: "/setores"
+      {
+        title: "Home",
+        icon: "mdi-home",
+        route: "/home"
       },
-
- {
+      
+      {
+        title: "Clientes",
+        icon: "mdi-account",
+        route: "/clientes"
+      },
+      {
         title: "Produtos",
         icon: "mdi-basket",
         route: "/produtos"
       },
       {
-        title: "Pagamento",
+        title: "Controle",
         icon: "mdi-apps-box",
-        route: "/pagamento"
+        route: "/controle"
+      },
+      {
+        title: "Usuarios",
+        icon: "mdi-account-multiple",
+        route: "/usuarios"
+=======
+  import HttpRequestUtil from "@/util/HttpRequestUtil";
+  export default {
+    props: {
+      source: String
+    },
+    data: () => ({
+      drawer: null,
+      username: "",
+      password: "",
+      logado: false,
+      items: [{
+          title: "Home",
+          icon: "mdi-home",
+          route: "/home"
+        },
+        {
+          title: "Clientes",
+          icon: "mdi-account",
+          route: "/clientes"
+        },
+
+
+        {
+          title: "Produtos",
+          icon: "mdi-basket",
+          route: "/produtos"
+        },
+        {
+          title: "Controle",
+          icon: "mdi-apps-box",
+          route: "/controle"
+        },
+        {
+          title: "Usuarios",
+          icon: "mdi-account-multiple",
+          route: "/usuarios"
+        },
+        {
+          title: "Contato",
+          icon: "mdi-comment-account",
+          route: "/contato"
+        },
+        {
+          title: "Mensagem",
+          icon: "mdi-comment",
+          route: "/mensagem"
+        },
+
+        {
+          title: "Compras",
+          icon: "mdi-cart",
+          route: "/compras"
+        },
+        {
+          title: "Setores",
+          icon: "mdi-apps-box",
+          route: "/setores"
+        }
+      ]
+    }),
+    methods: {
+      autenticar() {
+        let usuario = {};
+        usuario.username = this.username;
+        usuario.senha = this.password;
+        usuario.tipo = "CLIENTE";
+
+        HttpRequestUtil.autenticar(usuario).then(usuarioAut => {
+          if (JSON.stringify(usuarioAut[0]) != undefined) {
+            this.buscarClientePorUsuario(usuarioAut[0]._id);
+          } else {
+            alert("Usuário e/ou senha inválidos");
+          }
+        });
+>>>>>>> f389a2fedc767882dea2d340d31e14771606605c
+      },
+      buscarClientePorUsuario(idusuario) {
+        let usuario = {};
+        usuario.usuario = idusuario;
+
+        alert("Usuário para busca" + JSON.stringify(usuario))
+
+        HttpRequestUtil.buscaClientePorUsuario(usuario).then(clienteAut => {
+          alert('APP' + JSON.stringify(clienteAut));
+          localStorage.setItem("clienteLogado", JSON.stringify(clienteAut[0]));
+          this.logado = true;
+        });
       },
 
+<<<<<<< HEAD
       {
         title: "Carrinho",
         icon: "mdi-cart",
@@ -69,42 +200,67 @@ export default {
       },
 
       {
-        title: "Usuarios",
-        icon: "mdi-account-multiple",
-        route: "/usuarios"
-      },
-
-      {
-        title: "Contato",
-        icon: "mdi-comment-account",
-        route: "/contato"
-      },
-      
-      {
-        title: "Mensagem",
-        icon: "mdi-chat",
-        route: "/mensagem"
-      },
-     
-      {
+<<<<<<< HEAD
         title: "Sair",
         icon: "mdi-exit-to-app",
         route: "/sair"
       },
+=======
+        title: "Setores",
+        icon: "mdi-apps-box",
+        route: "/setores"
+      }
+>>>>>>> 80d341d4f238ca7eb02c9c12069bfeadb636408d
     ]
-  })
-};
+  }),
+  methods: {
+    autenticar() {
+      let usuario = {};
+      usuario.username = this.username;
+      usuario.senha = this.password;
+      usuario.tipo = "CLIENTE";
+
+      HttpRequestUtil.autenticar(usuario).then(usuarioAut => {
+        if (JSON.stringify(usuarioAut[0]) != undefined) {
+          if (
+            usuarioAut[0].username == usuario.username &&
+            usuarioAut[0].senha == usuario.senha &&
+            usuarioAut[0].tipo == usuario.tipo
+          ) {
+            this.buscarClientePorUsuario(usuarioAut[0]._id);
+          }
+=======
+      logout() {
+        localStorage.removeItem("clienteLogado");
+        this.logado = false;
+      },
+
+      buscarUsuarioLS() {
+        let lsUsuario = null;
+        lsUsuario = localStorage.getItem("clienteLogado");
+        if (lsUsuario == null) {
+          this.logado = false;
+>>>>>>> f389a2fedc767882dea2d340d31e14771606605c
+        } else {
+          this.logado = true;
+        }
+      }
+    },
+    mounted() {
+      this.buscarUsuarioLS();
+    }
+  };
 </script>
 <style>
-#keep .v-navigation-drawer__border {
-  display: none;
-}
+  #keep .v-navigation-drawer__border {
+    display: none;
+  }
 
-a {
-  text-align: center;
-  font-size: 20pt;
-  font-family: sans-serif;
-  font-weight: bold;
-  color: #2c3e50;
-}
+  a {
+    text-align: center;
+    font-size: 20pt;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #2c3e50;
+  }
 </style>

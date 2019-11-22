@@ -32,6 +32,7 @@
                   <v-spacer></v-spacer>
                 </v-toolbar>
 
+<<<<<<< HEAD
                 <div class="detalhes">
                   <p class="display-2 text-uppercase">
                     {{ produtoSelecionado.nome }}
@@ -41,12 +42,21 @@
                     {{ produtoSelecionado.descricao }}
                   </p>
 
+=======
+                <div class="detalhes" >
+>>>>>>> 80d341d4f238ca7eb02c9c12069bfeadb636408d
                   <v-img
                     style="margin:auto ; border: 1px solid black"
                     max-width="400px"
                     :src="produtoSelecionado.imagem"
+<<<<<<< HEAD
                     class="mt-3"
                     max-height="400px"
+=======
+                    class="d-flex child-flex"
+                    gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,0)"
+                    height="200px"
+>>>>>>> 80d341d4f238ca7eb02c9c12069bfeadb636408d
                   >
                   </v-img>
                   <p class="title ml-6">
@@ -157,9 +167,17 @@ export default {
   width: 100%;
   margin-top: 1%;
 }
+<<<<<<< HEAD
 .imagem-detalhe {
   margin: auto;
   border: 1px solid black;
+=======
+.imagem-detalhe{
+  
+  padding: 20px;
+  
+  border: 1px solid black
+>>>>>>> 80d341d4f238ca7eb02c9c12069bfeadb636408d
 }
 .dados {
   text-align: center;
