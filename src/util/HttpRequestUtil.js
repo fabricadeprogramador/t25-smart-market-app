@@ -49,6 +49,11 @@ export default {
     return axios.post(API_URL + "/contato", contato).then(contato => contato.data);
   },
 
+  //Contato BuscarPorCliente 
+  async buscarPorCliente(cliente) {
+    return axios.post(API_URL + "/contato/cliente", cliente).then(contato => contato.data);
+  },
+
   //Login
   async autenticar() {
     return axios
