@@ -46,22 +46,11 @@
             </v-toolbar>
             <v-card-text>
               <v-form>
-                <v-text-field
-                  label="Username"
-                  v-model="username"
-                  prepend-icon="mdi-account"
-                  type="text"
-                  color="amber"
-                ></v-text-field>
+                <v-text-field label="Username" v-model="username" prepend-icon="mdi-account" type="text" color="amber">
+                </v-text-field>
 
-                <v-text-field
-                  id="password"
-                  label="Password"
-                  v-model="password"
-                  prepend-icon="mdi-lock"
-                  type="password"
-                  color="amber"
-                ></v-text-field>
+                <v-text-field id="password" label="Password" v-model="password" prepend-icon="mdi-lock" type="password"
+                  color="amber"></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
@@ -76,124 +65,119 @@
 </template>
 
 <script>
-import HttpRequestUtil from "@/util/HttpRequestUtil";
-export default {
-  props: {
-    source: String
-  },
-  data: () => ({
-    drawer: null,
-    username: "",
-    password: "",
-    logado: false,
-    items: [
-      {
-        title: "Home",
-        icon: "mdi-home",
-        route: "/home"
-      },
-      {
-        title: "Clientes",
-        icon: "mdi-account",
-        route: "/clientes"
-      },
-     
+  import HttpRequestUtil from "@/util/HttpRequestUtil";
+  export default {
+    props: {
+      source: String
+    },
+    data: () => ({
+      drawer: null,
+      username: "",
+      password: "",
+      logado: false,
+      items: [{
+          title: "Home",
+          icon: "mdi-home",
+          route: "/home"
+        },
+        {
+          title: "Clientes",
+          icon: "mdi-account",
+          route: "/clientes"
+        },
 
-      {
-        title: "Produtos",
-        icon: "mdi-basket",
-        route: "/produtos"
-      },
-      {
-        title: "Controle",
-        icon: "mdi-apps-box",
-        route: "/controle"
-      },
-      {
-        title: "Usuarios",
-        icon: "mdi-account-multiple",
-        route: "/usuarios"
-      },
-      {
-        title: "Contato",
-        icon: "mdi-comment-account",
-        route: "/contato"
-      },
 
-      {
-        title: "Compras",
-        icon: "mdi-cart",
-        route: "/compras"
-      },
-      {
-        title: "Setores",
-        icon: "mdi-apps-box",
-        route: "/setores"
-      }
-    ]
-  }),
-  methods: {
-    autenticar() {
-      let usuario = {};
-      usuario.username = this.username;
-      usuario.senha = this.password;
-      usuario.tipo = "CLIENTE";
+        {
+          title: "Produtos",
+          icon: "mdi-basket",
+          route: "/produtos"
+        },
+        {
+          title: "Controle",
+          icon: "mdi-apps-box",
+          route: "/controle"
+        },
+        {
+          title: "Usuarios",
+          icon: "mdi-account-multiple",
+          route: "/usuarios"
+        },
+        {
+          title: "Contato",
+          icon: "mdi-comment-account",
+          route: "/contato"
+        },
 
-      HttpRequestUtil.autenticar(usuario).then(usuarioAut => {
-        if (JSON.stringify(usuarioAut[0]) != undefined) {
-          if (
-            usuarioAut[0].username == usuario.username &&
-            usuarioAut[0].senha == usuario.senha &&
-            usuarioAut[0].tipo == usuario.tipo
-          ) {
-            this.buscarClientePorUsuario(usuarioAut[0]._id);
-          }
-        } else {
-          alert("Usuário e/ou senha inválidos");
+        {
+          title: "Compras",
+          icon: "mdi-cart",
+          route: "/compras"
+        },
+        {
+          title: "Setores",
+          icon: "mdi-apps-box",
+          route: "/setores"
         }
-      });
-    },
-    buscarClientePorUsuario(idusuario) {
-      let cliente = {};
-      cliente.usuario = idusuario;
-      
-      HttpRequestUtil.buscarClientePorUsuario(cliente).then(clienteAut => {
-      alert('APP' + JSON.stringify(clienteAut));
-        localStorage.setItem("clienteLogado", JSON.stringify(clienteAut[0]));
-        this.logado = true;
-      });
-    },
+      ]
+    }),
+    methods: {
+      autenticar() {
+        let usuario = {};
+        usuario.username = this.username;
+        usuario.senha = this.password;
+        usuario.tipo = "CLIENTE";
 
-    logout() {
-      localStorage.removeItem("clienteLogado");
-      this.logado = false;      
-    },
-    
-    buscarUsuarioLS() {
-      let lsUsuario = null;
-      lsUsuario = localStorage.getItem("clienteLogado");
-      if (lsUsuario == null) {
+        HttpRequestUtil.autenticar(usuario).then(usuarioAut => {
+          if (JSON.stringify(usuarioAut[0]) != undefined) {
+            this.buscarClientePorUsuario(usuarioAut[0]._id);
+          } else {
+            alert("Usuário e/ou senha inválidos");
+          }
+        });
+      },
+      buscarClientePorUsuario(idusuario) {
+        let usuario = {};
+        usuario.usuario = idusuario;
+
+        alert("Usuário para busca" + JSON.stringify(usuario))
+
+        HttpRequestUtil.buscaClientePorUsuario(usuario).then(clienteAut => {
+          alert('APP' + JSON.stringify(clienteAut));
+          localStorage.setItem("clienteLogado", JSON.stringify(clienteAut[0]));
+          this.logado = true;
+        });
+      },
+
+      logout() {
+        localStorage.removeItem("clienteLogado");
         this.logado = false;
-      } else {
-        this.logado = true;
+      },
+
+      buscarUsuarioLS() {
+        let lsUsuario = null;
+        lsUsuario = localStorage.getItem("clienteLogado");
+        if (lsUsuario == null) {
+          this.logado = false;
+        } else {
+          this.logado = true;
+        }
       }
+    },
+    mounted() {
+      this.buscarUsuarioLS();
     }
-  },
-  mounted() {
-    this.buscarUsuarioLS();
-  }
-};
+  };
 </script>
 <style>
-#keep .v-navigation-drawer__border {
-  display: none;
-}
+  #keep .v-navigation-drawer__border {
+    display: none;
+  }
 
-a {
-  text-align: center;
-  font-size: 20pt;
-  font-family: sans-serif;
-  font-weight: bold;
-  color: #2c3e50;
-}
+  a {
+    text-align: center;
+    font-size: 20pt;
+    font-family: sans-serif;
+    font-weight: bold;
+    color: #2c3e50;
+  }
 </style>
