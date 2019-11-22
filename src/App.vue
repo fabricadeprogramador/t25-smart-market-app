@@ -107,6 +107,11 @@
           icon: "mdi-comment-account",
           route: "/contato"
         },
+        {
+          title: "Mensagem",
+          icon: "mdi-comment",
+          route: "/mensagem"
+        },
 
         {
           title: "Compras",
