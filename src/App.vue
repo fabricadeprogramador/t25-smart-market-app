@@ -92,13 +92,12 @@ export default {
         icon: "mdi-home",
         route: "/home"
       },
+      
       {
         title: "Clientes",
         icon: "mdi-account",
         route: "/clientes"
       },
-     
-
       {
         title: "Produtos",
         icon: "mdi-basket",
@@ -121,10 +120,11 @@ export default {
       },
 
       {
-        title: "Compras",
+        title: "Carrinho",
         icon: "mdi-cart",
-        route: "/compras"
+        route: "/carrinho"
       },
+
       {
         title: "Setores",
         icon: "mdi-apps-box",

@@ -24,8 +24,8 @@ export default {
   },
 
   //Compras
-  async buscarCompras() {
-    return axios.get(API_URL + "/compras").then(compra => compra.data);
+  async salvarCompras(compra) {
+    return axios.post(API_URL + "/compras").then(compra => compra.data);
   },
 
   //Clientes
