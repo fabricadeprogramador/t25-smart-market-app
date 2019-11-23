@@ -65,44 +65,6 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import HttpRequestUtil from "@/util/HttpRequestUtil";
-export default {
-  props: {
-    source: String
-  },
-  data: () => ({
-    drawer: null,
-    username: "",
-    password: "",
-    logado: false,
-    items: [
-      {
-        title: "Home",
-        icon: "mdi-home",
-        route: "/home"
-      },
-      
-      {
-        title: "Clientes",
-        icon: "mdi-account",
-        route: "/clientes"
-      },
-      {
-        title: "Produtos",
-        icon: "mdi-basket",
-        route: "/produtos"
-      },
-      {
-        title: "Controle",
-        icon: "mdi-apps-box",
-        route: "/controle"
-      },
-      {
-        title: "Usuarios",
-        icon: "mdi-account-multiple",
-        route: "/usuarios"
-=======
   import HttpRequestUtil from "@/util/HttpRequestUtil";
   export default {
     props: {
@@ -114,53 +76,35 @@ export default {
       password: "",
       logado: false,
       items: [{
-          title: "Home",
-          icon: "mdi-home",
-          route: "/home"
-        },
-        {
-          title: "Clientes",
-          icon: "mdi-account",
-          route: "/clientes"
-        },
+          title: "Setores",
+          icon: "mdi-apps-box",
+          route: "/setores"
+        }, 
 
+        {
+          title: "Carrinho",
+          icon: "mdi-cart",
+          route: "/carrinho"
+        },
 
         {
           title: "Produtos",
           icon: "mdi-basket",
           route: "/produtos"
         },
-        {
-          title: "Controle",
-          icon: "mdi-apps-box",
-          route: "/controle"
-        },
-        {
-          title: "Usuarios",
-          icon: "mdi-account-multiple",
-          route: "/usuarios"
-        },
+
         {
           title: "Contato",
           icon: "mdi-comment-account",
           route: "/contato"
         },
+
         {
           title: "Mensagem",
           icon: "mdi-comment",
           route: "/mensagem"
-        },
-
-        {
-          title: "Compras",
-          icon: "mdi-cart",
-          route: "/compras"
-        },
-        {
-          title: "Setores",
-          icon: "mdi-apps-box",
-          route: "/setores"
         }
+              
       ]
     }),
     methods: {
@@ -177,7 +121,6 @@ export default {
             alert("Usuário e/ou senha inválidos");
           }
         });
->>>>>>> f389a2fedc767882dea2d340d31e14771606605c
       },
       buscarClientePorUsuario(idusuario) {
         let usuario = {};
@@ -192,44 +135,6 @@ export default {
         });
       },
 
-<<<<<<< HEAD
-      {
-        title: "Carrinho",
-        icon: "mdi-cart",
-        route: "/carrinho"
-      },
-
-      {
-<<<<<<< HEAD
-        title: "Sair",
-        icon: "mdi-exit-to-app",
-        route: "/sair"
-      },
-=======
-        title: "Setores",
-        icon: "mdi-apps-box",
-        route: "/setores"
-      }
->>>>>>> 80d341d4f238ca7eb02c9c12069bfeadb636408d
-    ]
-  }),
-  methods: {
-    autenticar() {
-      let usuario = {};
-      usuario.username = this.username;
-      usuario.senha = this.password;
-      usuario.tipo = "CLIENTE";
-
-      HttpRequestUtil.autenticar(usuario).then(usuarioAut => {
-        if (JSON.stringify(usuarioAut[0]) != undefined) {
-          if (
-            usuarioAut[0].username == usuario.username &&
-            usuarioAut[0].senha == usuario.senha &&
-            usuarioAut[0].tipo == usuario.tipo
-          ) {
-            this.buscarClientePorUsuario(usuarioAut[0]._id);
-          }
-=======
       logout() {
         localStorage.removeItem("clienteLogado");
         this.logado = false;
@@ -240,7 +145,6 @@ export default {
         lsUsuario = localStorage.getItem("clienteLogado");
         if (lsUsuario == null) {
           this.logado = false;
->>>>>>> f389a2fedc767882dea2d340d31e14771606605c
         } else {
           this.logado = true;
         }
