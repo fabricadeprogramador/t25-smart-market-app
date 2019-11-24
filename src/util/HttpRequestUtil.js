@@ -23,6 +23,10 @@ export default {
     return axios.get(API_URL + "/produtos").then(produto => produto.data);
   },
 
+  async buscarProdutosSetor(setor) {
+    return axios.post(API_URL + "/produtos/setor", setor).then(produto => produto.data);
+  },
+
   //Compras
   async buscarCompras() {
     return axios.get(API_URL + "/compras").then(compra => compra.data);
@@ -61,12 +65,5 @@ export default {
     return axios.get(API_URL + "/setores").then(setor => setor.data);
   },
 
-  async salvarSetor(setor) {
-    return axios.post(API_URL + "/setores", setor).then(setor => setor.data);
-  },
-
-  async setorStatus(setor) {
-    return axios.put(API_URL + "/setores", setor).then(setor => setor.data);
-  },
 
 };
