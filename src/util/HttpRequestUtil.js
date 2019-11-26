@@ -1,4 +1,3 @@
-
 const API_URL = "http://ht-smart-market-api.herokuapp.com";
 import axios from "axios";
 
@@ -23,9 +22,13 @@ export default {
     return axios.get(API_URL + "/produtos").then(produto => produto.data);
   },
 
+  async buscarProdutosSetor(setor) {
+    return axios.post(API_URL + "/produtos/setor", setor).then(produto => produto.data);
+  },
+
   //Compras
-  async buscarCompras() {
-    return axios.get(API_URL + "/compras").then(compra => compra.data);
+  async salvarCompras(compra) {
+    return axios.post(API_URL + "/compras").then(compra => compra.data);
   },
 
   //Clientes
@@ -39,9 +42,9 @@ export default {
       .then(response => response.data);
   },
 
-  async buscarClientePorUsuario(usuario) {
+  async buscaClientePorUsuario(usuario) {
     return axios
-      .get(API_URL + "/clientes/usuario", usuario)
+      .post(API_URL + "/clientes/usuario", usuario)
       .then(response => response.data);
   },
 
@@ -53,6 +56,11 @@ export default {
   //Contato Adicionar
   async salvarContato(contato) {
     return axios.post(API_URL + "/contato", contato).then(contato => contato.data);
+  },
+
+  //Contato BuscarPorCliente 
+  async buscarPorCliente(cliente) {
+    return axios.post(API_URL + "/contato/cliente", cliente).then(contato => contato.data);
   },
 
   //Login
@@ -67,12 +75,5 @@ export default {
     return axios.get(API_URL + "/setores").then(setor => setor.data);
   },
 
-  async salvarSetor(setor) {
-    return axios.post(API_URL + "/setores", setor).then(setor => setor.data);
-  },
-
-  async setorStatus(setor) {
-    return axios.put(API_URL + "/setores", setor).then(setor => setor.data);
-  },
 
 };
