@@ -76,18 +76,22 @@
       password: "",
       logado: false,
       items: [{
-          title: "Home",
-          icon: "mdi-home",
-          route: "/home"
+          title: "Setores",
+          icon: "mdi-apps-box",
+          route: "/setores"
+        }, 
+
+        {
+          title: "Carrinho",
+          icon: "mdi-cart",
+          route: "/carrinho"
         },
-        
+
         {
           title: "Produtos",
           icon: "mdi-basket",
           route: "/produtos"
         },
-        
-        
         {
           title: "Contato",
           icon: "mdi-comment-account",
@@ -95,15 +99,11 @@
         },
 
         {
-          title: "Compras",
-          icon: "mdi-cart",
-          route: "/compras"
-        },
-        {
-          title: "Setores",
-          icon: "mdi-apps-box",
-          route: "/setores"
+          title: "Mensagem",
+          icon: "mdi-comment",
+          route: "/mensagem"
         }
+              
       ]
     }),
     methods: {
@@ -165,4 +165,5 @@
     font-weight: bold;
     color: #2c3e50;
   }
+  
 </style>
