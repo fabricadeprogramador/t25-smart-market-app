@@ -53,22 +53,31 @@ export default {
 
   }),
   methods: {
-    autenticar() {
-      let usuario = {}
-        usuario.username = this.username
-        usuario.senha = this.password
-        usuario.tipo = "ADMIN"
+     autenticar() {
+        let usuario = {};
+        usuario.username = this.username;
+        usuario.senha = this.password;
+        usuario.tipo = "CLIENTE";
 
-      HttpRequestUtil.autenticar(usuario).then(usuario => {
-        if(usuario == "Usuário ou senha inválidos!"){
-          alert("usuário invalido")
-        }else {
-          localStorage.setItem("Logado", JSON.stringify(usuario[0]))
-          alert("Usuário Logado com sucesso!")
-          this.$router.push("/")
-        }
-      })
-    }  
+        HttpRequestUtil.autenticar(usuario).then(usuarioAut => {
+          if (JSON.stringify(usuarioAut[0]) != undefined) {
+            this.buscarClientePorUsuario(usuarioAut[0]._id);
+          } else {
+            alert("Usuário e/ou senha inválidos");
+          }
+        });
+      },
+      buscarClientePorUsuario(idusuario) {
+        let usuario = {};
+        usuario.usuario = idusuario;
+
+
+        HttpRequestUtil.buscaClientePorUsuario(usuario).then(clienteAut => {
+         
+          localStorage.setItem("clienteLogado", JSON.stringify(clienteAut[0]));
+          this.logado = true;
+        });
+      },
   }
 };
 </script>

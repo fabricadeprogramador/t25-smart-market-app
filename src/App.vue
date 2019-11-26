@@ -41,7 +41,7 @@
         <v-col cols="12" sm="8" md="4">
           <v-card class="elevation-12">
             <v-toolbar color="amber" flat>
-              <v-toolbar-title>Login Market</v-toolbar-title>
+              <v-toolbar-title>Login Smart Market - App </v-toolbar-title>
               <div class="flex-grow-1"></div>
             </v-toolbar>
             <v-card-text>
@@ -80,28 +80,14 @@
           icon: "mdi-home",
           route: "/home"
         },
-        {
-          title: "Clientes",
-          icon: "mdi-account",
-          route: "/clientes"
-        },
-
-
+        
         {
           title: "Produtos",
           icon: "mdi-basket",
           route: "/produtos"
         },
-        {
-          title: "Controle",
-          icon: "mdi-apps-box",
-          route: "/controle"
-        },
-        {
-          title: "Usuarios",
-          icon: "mdi-account-multiple",
-          route: "/usuarios"
-        },
+        
+        
         {
           title: "Contato",
           icon: "mdi-comment-account",
@@ -139,10 +125,9 @@
         let usuario = {};
         usuario.usuario = idusuario;
 
-        alert("Usuário para busca" + JSON.stringify(usuario))
 
         HttpRequestUtil.buscaClientePorUsuario(usuario).then(clienteAut => {
-          alert('APP' + JSON.stringify(clienteAut));
+         
           localStorage.setItem("clienteLogado", JSON.stringify(clienteAut[0]));
           this.logado = true;
         });
