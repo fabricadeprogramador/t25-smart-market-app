@@ -121,9 +121,9 @@ export default {
       },
 
       {
-        title: "Compras",
+        title: "Carrinho",
         icon: "mdi-cart",
-        route: "/compras"
+        route: "/carrinho"
       },
       {
         title: "Setores",

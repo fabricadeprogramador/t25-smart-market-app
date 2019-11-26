@@ -32,7 +32,7 @@
                 :loading="dialog1"
                 class="white--text mt-10"
                 color="purple darken-2"
-                @click="dialog1 = true"
+                @click="selecPagamento()"
               >Processar Pagamento</v-btn>
               <v-dialog v-model="dialog1" hide-overlay persistent width="300">
                 <v-card color="primary" dark>
@@ -128,6 +128,8 @@ export default {
       this.dialog = false;
     },
 
+    
+
     calcularParcelas() {
       if (this.formadepagamento == "Cartão de Crédito" && this.dialogm1 > 0) {
         if (this.dialogm1 <= 3) {
@@ -146,6 +148,9 @@ export default {
     selecPagamento() {
       if (this.formadepagamento == null) {
         this.alertaPag = true;
+      }else{
+        this.alertaPag = false
+        this.dialog1 = true
       }
     }
   },
