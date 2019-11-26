@@ -9,8 +9,8 @@
         class="ma-6 pb-2 elevation-6"
         @click="buscarProdutos(setor)"
       >
-      <div class="pa-3">
-        <h3 class=" text-center ">{{setor.name}}</h3>
+      <div class="pa-3" v-if="setor.ativo">
+        <h3 class=" text-center">{{setor.name}}</h3>
       </div>
 
         <v-img v-if="setor.ativo" :src="setor.imagem" height="150px"></v-img>
