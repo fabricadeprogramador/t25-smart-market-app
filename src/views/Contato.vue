@@ -1,35 +1,25 @@
 <template>
   <v-card>
     <v-card-text>
-      <v-text-field  label="Assunto" v-model="assunto" ></v-text-field>
+      <v-text-field label="Assunto" v-model="assunto"></v-text-field>
     </v-card-text>
-  
 
     <v-container fluid>
-      <v-textarea
-        name="input-7-1"
-        filled
-        label="Mensagem"
-        auto-grow
-        v-model="mensagem"
-        
-      ></v-textarea>
+      <v-textarea name="input-7-1" filled label="Mensagem" auto-grow v-model="mensagem"></v-textarea>
     </v-container>
 
     <div class="text-center">
-    <v-sheet color="blue lighten-2"></v-sheet>
-  </div>
+      <v-sheet color="blue lighten-2"></v-sheet>
+    </div>
 
     <div class="text-center">
-    <v-btn class="ma-2" rounded color="primary" dark @click="adicionarMensagem()">Enviar Mensagem</v-btn>
-  </div>
-
-  
+      <v-btn class="ma-2" rounded color="primary" dark @click="adicionarMensagem()">Enviar Mensagem</v-btn>
+    </div>
   </v-card>
 </template>
 
 <script>
-import HttpRequestUtil from "@/util/HttpRequestUtil"
+import HttpRequestUtil from "@/util/HttpRequestUtil";
 export default {
   data: () => ({
     assunto: "",
@@ -37,21 +27,22 @@ export default {
     respondido: false,
     resposta: "",
     datacontato: "07/11/2019"
-
   }),
   methods: {
     adicionarMensagem() {
-      let contato = {}
-      contato.assunto = this.assunto
-      contato.mensagem = this.mensagem
-      contato.respondido = false
-      contato.resposta = ""
-      contato.datacontato = this.datacontato
+      let contato = {};
+      contato.assunto = this.assunto;
+      contato.mensagem = this.mensagem;
+      contato.respondido = false;
+      contato.resposta = "";
+      contato.datacontato = this.datacontato;
 
-      HttpRequestUtil.salvarContato(contato).then (responde => {
-        
-      })
+      if (localStorage.getItem("clienteLogado")  != null) {
+        contato.cliente = JSON.parse(localStorage.getItem("clienteLogado"));
+      }
+
+      HttpRequestUtil.salvarContato(contato).then(responde => {});
     }
   }
-}
+};
 </script>
