@@ -22,6 +22,10 @@ export default {
   async buscarProdutos() {
     return axios.get(API_URL + "/produtos").then(produto => produto.data);
   },
+  
+  async buscarProdutosSetor(setor) {
+    return axios.post(API_URL + "/produtos/setor", setor).then(produtos => produtos.data);
+  },
 
   //Compras
   async salvarCompras(compra) {

@@ -32,8 +32,8 @@ export default {
   methods: {
     buscarProdutos(setor) {
       
-      let setorSalo = setor
-      httpRequstUtil.buscarProdutosSetor(setorSalo).then(produtos => {
+      let setorClicado = setor
+      httpRequstUtil.buscarProdutosSetor(setorClicado).then(produtos => {
         
         if(JSON.stringify(produtos) != undefined) {
           localStorage.setItem("produtosPorSetor", JSON.stringify(produtos));
