@@ -8,7 +8,7 @@
       :key="setor._id"
       @click="buscarProdutos(setor)"
       >
-      <v-card class="ma-6 pb-2 elevation-6" v-if="setor.ativo">
+      <v-card class="ma-6 pb-2 elevation-12" v-if="setor.ativo">
       <div class="pa-3">
         <h3 class=" text-center">{{setor.name}}</h3>
       </div>
