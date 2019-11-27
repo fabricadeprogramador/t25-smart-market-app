@@ -37,7 +37,7 @@ export default {
       contato.resposta = "";
       contato.datacontato = this.datacontato;
 
-      if (localStorage.getItem("clienteLogado") == null) {
+      if (localStorage.getItem("clienteLogado")  != null) {
         contato.cliente = JSON.parse(localStorage.getItem("clienteLogado"));
       }
 
