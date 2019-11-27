@@ -83,15 +83,16 @@ export default {
         icon: "mdi-comment",
         route: "/mensagem"
       }
-    ]
-  }),
-  methods: {
-    logout() {
-      localStorage.removeItem("clienteLogado");
-      window.location.pathname = "/login";
+              
+      ]
+    }),
+    methods: {
+      logout() {
+        localStorage.removeItem("clienteLogado");
+        window.location.pathname = '/login';
+      }
     }
   }
-};
 </script>
 <style>
 #keep .v-navigation-drawer__border {
