@@ -26,11 +26,7 @@
                 :loading="dialog1"
                 class="white--text"
                 color="purple darken-2"
-<<<<<<< HEAD
-                @click="selecPagamento()"
-=======
                 @click="selecPagamento"
->>>>>>> a5d3ea49b3e754af929459a5a26f8cb0120e95bc
               >Processar Pagamento</v-btn>
               <v-dialog v-model="dialog1" hide-overlay persistent width="300" v-if="selecPagamento">
                 <v-card color="primary" dark>
@@ -45,7 +41,12 @@
         </v-list>
         <template>
           <v-row justify="center">
-            <v-dialog v-if="formadepagamento == 'Cartão de Crédito'" v-model="dialog" scrollable max-width="350px">
+            <v-dialog
+              v-if="formadepagamento == 'Cartão de Crédito'"
+              v-model="dialog"
+              scrollable
+              max-width="350px"
+            >
               <template v-slot:activator="{ on }">
                 <v-btn color="primary" dark v-on="on">Parcelas</v-btn>
               </template>
@@ -72,118 +73,93 @@
         </template>
 
         <template>
-  
-    <v-alert type="warning" v-if="alertaPag">
-      Selecione uma forma de Pagamento!</v-alert>
-      </template>
+          <v-alert type="warning" v-if="alertaPag">Selecione uma forma de Pagamento!</v-alert>
+        </template>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      dialogm1: 0,
-      dialog: false,
-      dialog1: false,
-      alertaPag: false,
+import HttpRequestUtil from "@/util/HttpRequestUtil";
+export default {
+  data: () => ({
+    dialogm1: 0,
+    dialog: false,
+    dialog1: false,
+    alertaPag: false,
 
-      compra: [],
-      carrinho: [],
+    compra: [],
+    carrinho: [],
 
-      items: ["Boleto", "Cartão de Débito", "Cartão de Crédito", "Paypal"],
+    items: ["Boleto", "Cartão de Débito", "Cartão de Crédito", "Paypal"],
 
-      qtdParcelas: 0,
+    qtdParcelas: 0,
 
-      valortotaldaCompra: 0,
-
-      formadepagamento: null
-
+    valortotaldaCompra: 0,
+    valordasParcelas: 0,
+    formadepagamento: null
   }),
 
   watch: {
-      dialog1(val) {
-        if (!val) return;
+    dialog1(val) {
+      if (!val) return;
 
-        setTimeout(() => (this.dialog1 = false), 4000)
-      }
+      setTimeout(() => (this.dialog1 = false), 4000);
+    }
+  },
+
+  methods: {
+    fechardialog() {
+      this.formadepagamento = null;
+      this.dialog = false;
     },
-
-<<<<<<< HEAD
-    
 
     calcularParcelas() {
       if (this.formadepagamento == "Cartão de Crédito" && this.dialogm1 > 0) {
-        if (this.dialogm1 <= 3) {
-=======
-    methods: {
-      fechardialog() {
-        this.formadepagamento = null;
+        this.valordasParcelas = this.valortotaldaCompra / this.dialogm1;
+        this.qtdParcelas = this.dialogm1;
         this.dialog = false;
-      },
-
-      calcularParcelas() {
-        if (this.formadepagamento == "Cartão de Crédito" && this.dialogm1 > 0) {
->>>>>>> a5d3ea49b3e754af929459a5a26f8cb0120e95bc
-          this.valordasParcelas = this.valortotaldaCompra / this.dialogm1;
-          this.qtdParcelas = this.dialogm1;
-          this.dialog = false;
-        }
-      },
-
-      selecPagamento() {
-        let produto = localStorage.getItem(JSON.parse("carrinho"))
-        let cliente = localStorage.getItem(JSON.parse("clienteLogado"))
-        if (this.formadepagamento == null) {
-          this.alertaPag = true;
-        }else{
-          this.alertaPag = false;
-          this.dialog1 =  true;
-
-          let compra = {}
-
-            compra.cliente = cliente
-            compra.produto = produto
-            compra.data = data
-            compra.valorTotal = this.valorTotaldaCompra
-            compra.pagamento = this.formadepagamento
-
-            HttpRequestUtil.salvarCompras(compra).then(compra => {
-              alert("Compra efetuada com sucesso")
-
-              localStorage.setItem(
-                
-                "carrinho", JSON.stringify(this.carrinho)
-            )
-            
-            
-        }
-            )
       }
     },
 
-<<<<<<< HEAD
     selecPagamento() {
+      let produto = JSON.parse(localStorage.getItem("carrinho"));
+      let cliente = JSON.parse(localStorage.getItem("clienteLogado"));
       if (this.formadepagamento == null) {
         this.alertaPag = true;
-      }else{
-        this.alertaPag = false
-        this.dialog1 = true
-=======
-    mounted() {
-      if (localStorage.getItem("carrinho") == null) {
-        localStorage.setItem("carrinho", JSON.stringify(this.compra));
       } else {
-        let compra = JSON.parse(localStorage.getItem("carrinho"));
-        this.compra = compra;
-      }
-      for (let i = 0; i < this.compra.length; i++) {
-        this.valortotaldaCompra += parseFloat(this.compra[i].valor);
->>>>>>> a5d3ea49b3e754af929459a5a26f8cb0120e95bc
+        this.alertaPag = false;
+        this.dialog1 = true;
+
+        let compraNova = {};
+
+        compraNova.cliente = cliente;
+        compraNova.produtos = produto;
+        compraNova.data = "12/12/2020";
+        compraNova.valorTotal = this.valortotaldaCompra;
+        compraNova.pagamento = this.formadepagamento;
+         alert(JSON.stringify(compraNova));
+
+        HttpRequestUtil.salvarCompras(compraNova).then(compraRetornada => {
+          alert(JSON.stringify(compraRetornada));
+
+          localStorage.setItem("carrinho", JSON.stringify(this.carrinho));
+        });
       }
     }
   },
-  
+
+  mounted() {
+    if (localStorage.getItem("carrinho") == null) {
+      localStorage.setItem("carrinho", JSON.stringify(this.compra));
+    } else {
+      let compra = JSON.parse(localStorage.getItem("carrinho"));
+      this.compra = compra;
+    }
+    for (let i = 0; i < this.compra.length; i++) {
+      this.valortotaldaCompra += parseFloat(this.compra[i].valor);
+    }
   }
+};
 </script>

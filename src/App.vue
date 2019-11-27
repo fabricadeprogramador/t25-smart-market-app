@@ -133,16 +133,11 @@
         });
       },
 
-<<<<<<< HEAD
-      {
-        title: "Carrinho",
-        icon: "mdi-cart",
-        route: "/carrinho"
-=======
+
       logout() {
         localStorage.removeItem("clienteLogado");
         this.logado = false;
->>>>>>> a5d3ea49b3e754af929459a5a26f8cb0120e95bc
+
       },
 
       buscarUsuarioLS() {
