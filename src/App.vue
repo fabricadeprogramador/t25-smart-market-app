@@ -80,50 +80,10 @@
       ]
     }),
     methods: {
-      autenticar() {
-        let usuario = {};
-        usuario.username = this.username;
-        usuario.senha = this.password;
-        usuario.tipo = "CLIENTE";
-
-        HttpRequestUtil.autenticar(usuario).then(usuarioAut => {
-          if (JSON.stringify(usuarioAut[0]) != undefined) {
-            this.buscarClientePorUsuario(usuarioAut[0]._id);
-          } else {
-            alert("Usuário e/ou senha inválidos");
-          }
-        });
-      },
-      buscarClientePorUsuario(idusuario) {
-        let usuario = {};
-        usuario.usuario = idusuario;
-
-
-        HttpRequestUtil.buscaClientePorUsuario(usuario).then(clienteAut => {
-         
-          localStorage.setItem("clienteLogado", JSON.stringify(clienteAut[0]));
-          this.logado = true;
-        });
-      },
-
       logout() {
         localStorage.removeItem("clienteLogado");
         window.location.pathname = '/login';
-      },
-
-      buscarUsuarioLS() {
-        let lsUsuario = null;
-        lsUsuario = localStorage.getItem("clienteLogado");
-        if (lsUsuario == null) {
-          this.logado = false;
-        } else {
-          this.logado = true;
-        }
       }
-    },
-    mounted() {
-      this.buscarUsuarioLS();
-
     }
   };
 </script>
