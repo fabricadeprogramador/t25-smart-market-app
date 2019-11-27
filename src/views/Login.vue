@@ -75,7 +75,9 @@ export default {
         HttpRequestUtil.buscaClientePorUsuario(usuario).then(clienteAut => {
          
           localStorage.setItem("clienteLogado", JSON.stringify(clienteAut[0]));
-          this.logado = true;
+          // this.$router.push('/');
+          window.location.pathname = '/'
+
         });
       },
   }
