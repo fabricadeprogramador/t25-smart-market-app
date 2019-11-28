@@ -1,6 +1,6 @@
-<template v-for="(item, index) in items">
+<template>
   <div class="mx-2 my-4">
-    <v-alert v-text="items.cliente.resposta" type="info"></v-alert>
+    <v-alert type="info"> <input v-model="resposta"></v-alert>
   </div>
 </template>
 
@@ -8,14 +8,14 @@
 import HttpRequestUtil from "@/util/HttpRequestUtil";
 export default {
   data: () => ({
-    items: ""
+    resposta: '',
   }),
   methods: {},
   mounted() {
     if (localStorage.getItem("clienteLogado") != null) {
       let cliente = JSON.parse(localStorage.getItem("clienteLogado"));
       HttpRequestUtil.buscarPorCliente(cliente).then(response => {
-        this.items = response;
+        this.resposta = response;
       });
     }
   }
