@@ -11,7 +11,7 @@
                 <v-card-text>
                   <v-form>
                     <v-text-field
-                      label="Username" 
+                      label="Usuário" 
                       v-model="username" 
                       prepend-icon="mdi-account" 
                       type="text"
@@ -20,7 +20,7 @@
 
                     <v-text-field
                       id="password"
-                      label="Password"
+                      label="Senha"
                       v-model="password"
                       prepend-icon="mdi-lock"
                       type="password"
@@ -29,9 +29,11 @@
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
-                  <div class="flex-grow-1"></div>
+                  <div class="flex-grow-1 "></div>
+                  <v-btn color="amber" @click="cadastrar" >Cadastrar</v-btn>
                   <v-btn color="amber" @click="autenticar" >Login</v-btn>
                 </v-card-actions>
+                
               </v-card>
             </v-col>
           </v-row>
@@ -75,11 +77,14 @@ export default {
         HttpRequestUtil.buscaClientePorUsuario(usuario).then(clienteAut => {
          
           localStorage.setItem("clienteLogado", JSON.stringify(clienteAut[0]));
-          // this.$router.push('/');
+          
           window.location.pathname = '/'
 
         });
       },
+      cadastrar(){
+        window.location.pathname = "/cadastro"
+      }
   }
 };
 </script>

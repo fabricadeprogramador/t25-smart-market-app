@@ -48,7 +48,13 @@
       password: "",
       logado: false,
       rota: window.location.pathname,
-      items: [{
+      items: [
+        {
+          title: "Meus Dados",
+          icon: "mdi-apps-box",
+          route: "/cadastro"
+        }, 
+        {
           title: "Setores",
           icon: "mdi-apps-box",
           route: "/setores"
