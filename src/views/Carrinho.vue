@@ -137,7 +137,7 @@ export default {
       if (localStorage.getItem("clienteLogado") != null) {
         this.$router.push("/pagamento");
       } else {
-        this.$router.push("/");
+        this.$router.push("/login");
       }
     },
 
