@@ -1,4 +1,3 @@
-
 const API_URL = "http://ht-smart-market-api.herokuapp.com";
 import axios from "axios";
 
@@ -22,7 +21,7 @@ export default {
   async buscarProdutos() {
     return axios.get(API_URL + "/produtos").then(produto => produto.data);
   },
-  
+
   async buscarProdutosSetor(setor) {
     return axios.post(API_URL + "/produtos/setor", setor).then(produtos => produtos.data);
   },
@@ -52,6 +51,11 @@ export default {
   //Contato Buscar
   async buscarResposta() {
     return axios.get(API_URL + "/contato").then(contato => contato.data);
+  },
+
+  //Contato BuscarPorCliente 
+  async buscarPorCliente(cliente) {
+    return axios.post(API_URL + "/contato/cliente", cliente).then(contato => contato.data);
   },
 
   //Contato Adicionar
