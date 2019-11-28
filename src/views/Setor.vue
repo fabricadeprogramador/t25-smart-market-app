@@ -1,21 +1,22 @@
 <template>
   <div>
-    <div class="text-center">
+    <div class="text-center pt-4">
       <h1>Setores</h1>
     </div>
-      <v-card
-        v-for="setor in setores"
-        :key="setor._id"
-        class="ma-6 pb-2 elevation-6"
-        @click="buscarProdutos(setor)"
+    <div
+      v-for="setor in setores"
+      :key="setor._id"
+      @click="buscarProdutos(setor)"
       >
-      <div class="pa-3" v-if="setor.ativo">
+      <v-card class="ma-6 pb-2 elevation-12" v-if="setor.ativo">
+      <div class="pa-3">
         <h3 class=" text-center">{{setor.name}}</h3>
       </div>
 
-        <v-img v-if="setor.ativo" :src="setor.imagem" height="150px"></v-img>
+        <v-img :src="setor.imagem" height="150px"></v-img>
 
       </v-card>
+    </div>
   </div>
 </template>
 
@@ -31,8 +32,8 @@ export default {
   methods: {
     buscarProdutos(setor) {
       
-      let setorSalo = setor
-      httpRequstUtil.buscarProdutosSetor(setorSalo).then(produtos => {
+      let setorClicado = setor
+      httpRequstUtil.buscarProdutosSetor(setorClicado).then(produtos => {
         
         if(JSON.stringify(produtos) != undefined) {
           localStorage.setItem("produtosPorSetor", JSON.stringify(produtos));

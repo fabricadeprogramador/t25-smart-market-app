@@ -23,12 +23,12 @@ export default {
   },
 
   async buscarProdutosSetor(setor) {
-    return axios.post(API_URL + "/produtos/setor", setor).then(produto => produto.data);
+    return axios.post(API_URL + "/produtos/setor", setor).then(produtos => produtos.data);
   },
 
   //Compras
   async salvarCompras(compra) {
-    return axios.post(API_URL + "/compras").then(compra => compra.data);
+    return axios.post(API_URL + "/compras", compra).then(compra => compra.data);
   },
 
   //Clientes
@@ -41,9 +41,9 @@ export default {
       .then(response => response.data);
   },
 
-  async buscaClientePorUsuario(usuario) {
+  async buscarClientePorUsuario(usuario) {
     return axios
-      .post(API_URL + "/clientes/usuario", usuario)
+      .get(API_URL + "/clientes/usuario", usuario)
       .then(response => response.data);
   },
 
@@ -52,14 +52,14 @@ export default {
     return axios.get(API_URL + "/contato").then(contato => contato.data);
   },
 
-  //Contato Adicionar
-  async salvarContato(contato) {
-    return axios.post(API_URL + "/contato", contato).then(contato => contato.data);
-  },
-
   //Contato BuscarPorCliente 
   async buscarPorCliente(cliente) {
     return axios.post(API_URL + "/contato/cliente", cliente).then(contato => contato.data);
+  },
+
+  //Contato Adicionar
+  async salvarContato(contato) {
+    return axios.post(API_URL + "/contato", contato).then(contato => contato.data);
   },
 
   //Login
@@ -74,5 +74,12 @@ export default {
     return axios.get(API_URL + "/setores").then(setor => setor.data);
   },
 
+  async salvarSetor(setor) {
+    return axios.post(API_URL + "/setores", setor).then(setor => setor.data);
+  },
+
+  async setorStatus(setor) {
+    return axios.put(API_URL + "/setores", setor).then(setor => setor.data);
+  },
 
 };

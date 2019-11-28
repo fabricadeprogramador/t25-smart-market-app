@@ -39,6 +39,10 @@ export default {
 
       if (localStorage.getItem("clienteLogado")  != null) {
         contato.cliente = JSON.parse(localStorage.getItem("clienteLogado"));
+      } else {
+        alert("Necessário estar logado")
+        
+        window.location.pathname = '/login'
       }
 
       HttpRequestUtil.salvarContato(contato).then(responde => {});

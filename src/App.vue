@@ -11,7 +11,13 @@
       <v-icon v-if="rota != `/login`" @click="logout">mdi-exit-to-app</v-icon>
     </v-app-bar>
 
-    <v-navigation-drawer v-if="rota != `/login`" v-model="drawer" app clipped color="grey lighten-4">
+    <v-navigation-drawer
+      v-if="rota != `/login`"
+      v-model="drawer"
+      app
+      clipped
+      color="grey lighten-4"
+    >
       <v-list dense nav>
         <v-list-item v-for="item in items" :key="item.title" router :to="item.route">
           <v-list-item-icon>
@@ -37,73 +43,71 @@
 </template>
 
 <script>
-  import HttpRequestUtil from "@/util/HttpRequestUtil";
-  export default {
-    props: {
-      source: String
-    },
-    data: () => ({
-      drawer: null,
-      username: "",
-      password: "",
-      logado: false,
-      rota: window.location.pathname,
-      items: [
-        {
-          title: "Meus Dados",
-          icon: "mdi-apps-box",
-          route: "/cadastro"
-        }, 
-        {
-          title: "Setores",
-          icon: "mdi-apps-box",
-          route: "/setores"
-        }, 
+import HttpRequestUtil from "@/util/HttpRequestUtil";
+export default {
+  props: {
+    source: String
+  },
+  data: () => ({
+    drawer: null,
+    username: "",
+    password: "",
+    logado: false,
+    rota: window.location.pathname,
+    items: [
+      {
+        title: "Meus Dados",
+        icon: "mdi-apps-box",
+        route: "/cadastro"
+      },
+      {
+        title: "Setores",
+        icon: "mdi-apps-box",
+        route: "/setores"
+      },
 
-        {
-          title: "Carrinho",
-          icon: "mdi-cart",
-          route: "/carrinho"
-        },
+      {
+        title: "Carrinho",
+        icon: "mdi-cart",
+        route: "/carrinho"
+      },
 
-        {
-          title: "Produtos",
-          icon: "mdi-basket",
-          route: "/produtos"
-        },
-        {
-          title: "Contato",
-          icon: "mdi-comment-account",
-          route: "/contato"
-        },
+      {
+        title: "Produtos",
+        icon: "mdi-basket",
+        route: "/produtos"
+      },
+      {
+        title: "Contato",
+        icon: "mdi-comment-account",
+        route: "/contato"
+      },
 
-        {
-          title: "Mensagem",
-          icon: "mdi-comment",
-          route: "/mensagem"
-        }
-              
-      ]
-    }),
-    methods: {
-      logout() {
-        localStorage.removeItem("clienteLogado");
-        window.location.pathname = '/login';
+      {
+        title: "Mensagem",
+        icon: "mdi-comment",
+        route: "/mensagem"
       }
+    ]
+  }),
+  methods: {
+    logout() {
+      localStorage.removeItem("clienteLogado");
+      window.location.pathname = "/login";
     }
-  };
+  }
+};
 </script>
 <style>
-  #keep .v-navigation-drawer__border {
-    display: none;
-  }
+#keep .v-navigation-drawer__border {
+  display: none;
+}
 
-  a {
-    text-align: center;
-    font-size: 20pt;
-    font-family: sans-serif;
-    font-weight: bold;
-    color: #2c3e50;
-  }
-
+a {
+  text-align: center;
+  font-size: 20pt;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #2c3e50;
+}
 </style>

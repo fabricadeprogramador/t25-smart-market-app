@@ -134,12 +134,11 @@ export default {
     },
 
     finalizarCompra() {
-      this.$router.push("/pagamento");
-      // if (localStorage.getItem("Logado") != null) {
-
-      // } else {
-      //   alert("você precisa estar logado pra finalizar à compra")
-      // }
+      if (localStorage.getItem("clienteLogado") != null) {
+        this.$router.push("/pagamento");
+      } else {
+        this.$router.push("/");
+      }
     },
 
     deletarProduto() {
