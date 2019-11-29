@@ -63,7 +63,7 @@ export default {
       {
         title: "Setores",
         icon: "mdi-apps-box",
-        route: "/setores"
+        route: "/"
       },
 
       {

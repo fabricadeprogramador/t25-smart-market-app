@@ -1,27 +1,50 @@
+<template>
+  <v-list-item-group class="mx-2 my-4">
+    <v-snackbar type="info" v-model="salvo" close-text="Close Alert" color="red" :top="y === 'top'">
+      RESPOSTA JÁ ENVIADA!
+      <v-btn dark text @click="salvo = false">Fechar</v-btn>
+    </v-snackbar>
 
-<template v-for="(item, index) in items" >
+    <template v-for="(item) in items">
+      <v-list-item :key="item.cliente">
+        <v-list-item-content>
+       
+          
+          <v-container fluid>
+            <v-row>
+              <v-col cols="10">
+                <v-list-item-title class="title ml-3 mr-5">
+                  Assunto:
+                  <v-list-item-subtitle class="font-weight-light" v-text="item.assunto"></v-list-item-subtitle>
+                </v-list-item-title>
+              </v-col>
+              <v-col cols="2" align="right">
+                <v-list-item-action-text v-text="item.datacontato"></v-list-item-action-text>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-list-item-title class="title ml-3 mr-5">Mensagem:</v-list-item-title>
+                <v-list-item-action-text v-text="item.mensagem"></v-list-item-action-text>
+              </v-col>
+            </v-row>
 
+            <v-row>
+              <v-col cols="9">
+                <v-list-item-title class="title ml-3 mr-5">Resposta:</v-list-item-title>
+                <v-list-item-subtitle v-text="item.resposta"></v-list-item-subtitle>
+              </v-col>
 
-    <v-list rounded>
-<v-alert
-      dense
-      type="info"
-    >
+           
 
-      
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-        >
-          <v-list-item-content>
-            <v-list-item-title v-text="item.resposta"></v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-   </v-alert>
-   </v-list>
+            </v-row>
+          </v-container>
+        </v-list-item-content>
+      </v-list-item>
+
     
-  
-  
+    </template>
+  </v-list-item-group>
 </template>
 
 <script>
