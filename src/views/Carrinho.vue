@@ -86,45 +86,8 @@ export default {
     produtoExcluido: null,
     valortotaldoCarrinho: 0,
 
-    carrinho: [
-      {
-        _id: "5db243494a682b23f094f560",
-        disponivel: false,
-        nome: "Produto 11",
-        marca: "Marca1",
-        valor: 110,
-        quantidade: 17,
-        imagem:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV23Gum3ATjspEkv4XtItsLEkLckfECVmYUo0w_v14oP-7uoQ58w&s",
-        validade: "10-24-2019",
-        __v: 0,
-        descricao: "descricao",
-        setor: {
-          _id: "5db249855257c64228c09e2f",
-          ativo: true,
-          name: "Frios"
-        }
-      },
-
-      {
-        _id: "5db243494a682b23f094f561",
-        disponivel: false,
-        nome: "Produto 11",
-        marca: "Marca1",
-        valor: 120,
-        quantidade: 10,
-        imagem:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV23Gum3ATjspEkv4XtItsLEkLckfECVmYUo0w_v14oP-7uoQ58w&s",
-        validade: "10-24-2019",
-        __v: 0,
-        descricao: "mamão",
-        setor: {
-          _id: "5db249855257c64228c09e2g",
-          ativo: true,
-          name: "Frios"
-        }
-      }
-    ]
+    carrinho: []
+    
   }),
 
   methods: {
