@@ -8,6 +8,7 @@ import Carrinho from "./views/Carrinho.vue";
 import Pagamento from "./views/Pagamento.vue";
 import Login from "./views/Login.vue";
 import Home from "./views/Home.vue";
+import Cadastro from "./views/Cadastro.vue";
 Vue.use(Router);
 
 
@@ -56,6 +57,11 @@ export default new Router({
       path: '/home',
       name: 'Home',
       component: Home
+    }, 
+    {
+      path: '/cadastro',
+      name: 'Cadastro',
+      component: Cadastro
     },
 
   ]

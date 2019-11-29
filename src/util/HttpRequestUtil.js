@@ -37,8 +37,7 @@ export default {
   },
 
   async salvarCliente(cliente) {
-    return axios
-      .get(API_URL + "/clientes", cliente)
+    return axios.post(API_URL + "/clientes", cliente)
       .then(response => response.data);
   },
 
