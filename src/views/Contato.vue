@@ -46,6 +46,12 @@ export default {
       }
 
       HttpRequestUtil.salvarContato(contato).then(responde => {});
+      this.limpar()
+
+    },
+    limpar(){
+      this.mensagem = ""
+      this.assunto = ""
     }
   }
 };
