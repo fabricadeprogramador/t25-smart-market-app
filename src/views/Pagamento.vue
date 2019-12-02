@@ -1,5 +1,17 @@
 <template>
   <v-container fluid>
+    <div>
+      <v-snackbar
+        type="info"
+        v-model="compraEfetuada"
+        close-text="Close Alert"
+        color="info"
+        :top="y === 'top'"
+      >
+        PARABÉNS, SUA COMPRA FOI FINALIZADA! EM BREVE CHEGARÁ NO LOCAL DE ENTREGA. OBRIGADO POR COMPRAR COM O SMART MARKET!
+        <v-btn dark text @click="compraEfetuada = false">Fechar</v-btn>
+      </v-snackbar>
+    </div>
     <v-row align="center">
       <v-col class="mx-auto" cols="12" sm="6">
         <v-select :items="items" filled label="Forma de Pagamento" v-model="formadepagamento"></v-select>
@@ -88,6 +100,7 @@ export default {
     dialog: false,
     dialog1: false,
     alertaPag: false,
+    compraEfetuada: false,
 
     compra: [],
     carrinho: [],
@@ -98,7 +111,8 @@ export default {
 
     valortotaldaCompra: 0,
     valordasParcelas: 0,
-    formadepagamento: null
+    formadepagamento: null,
+    y: "center"
   }),
 
   watch: {
@@ -139,12 +153,13 @@ export default {
         compraNova.data = "12/12/2020";
         compraNova.valorTotal = this.valortotaldaCompra;
         compraNova.pagamento = this.formadepagamento;
-         alert(JSON.stringify(compraNova));
+
+        this.compraEfetuada = true;
 
         HttpRequestUtil.salvarCompras(compraNova).then(compraRetornada => {
-          alert(JSON.stringify(compraRetornada));
-
           localStorage.setItem("carrinho", JSON.stringify(this.carrinho));
+
+          this.$router.push("/");
         });
       }
     }

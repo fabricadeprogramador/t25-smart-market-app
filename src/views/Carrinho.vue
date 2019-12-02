@@ -68,7 +68,7 @@
     <div class="text-center">
       <v-list-item-title class="title">
         Valor total do carrinho :
-        <v-list-item-title>R$: {{valortotaldoCarrinho}}</v-list-item-title>
+        <v-list-item-title>R$: {{valortotaldoCarrinho}},00</v-list-item-title>
       </v-list-item-title>
     </div>
     <div class="my-7 text-center">
@@ -87,7 +87,6 @@ export default {
     valortotaldoCarrinho: 0,
 
     carrinho: []
-    
   }),
 
   methods: {
@@ -117,6 +116,15 @@ export default {
             localStorage.setItem("carrinho", JSON.stringify(this.carrinho));
             this.produtoExcluido = null;
             this.dialog = false;
+
+            if (this.carrinho.length == 0) {
+              this.valortotaldoCarrinho = 0;
+            } else {
+              this.valortotaldoCarrinho = 0;
+              for (let i = 0; i < this.carrinho.length; i++) {
+                this.valortotaldoCarrinho += parseFloat(this.carrinho[i].valor);
+              }
+            }
           }
         }
       }
