@@ -15,7 +15,7 @@
         <v-list>
           <v-list-item-title class="title">
             Valor total da compra :
-            <v-list-item-title>R$: {{valortotaldaCompra}}</v-list-item-title>
+            <v-list-item-title>R$: {{valortotaldaCompra}},00</v-list-item-title>
           </v-list-item-title>
 
           <v-list-item-title class="title" v-if="formadepagamento == 'Cartão de Crédito'">
@@ -57,7 +57,11 @@
               max-width="350px"
             >
               <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on">Parcelas</v-btn>
+                <v-btn
+                  color="primary"
+                  dark
+                  v-on="on"
+                >Selecione o Número de Parcelas (Até 3x sem juros)</v-btn>
               </template>
               <v-card>
                 <v-card-title>Selecione o Número de Parcelas</v-card-title>
@@ -135,7 +139,14 @@ export default {
 
     calcularParcelas() {
       if (this.formadepagamento == "Cartão de Crédito" && this.dialogm1 > 0) {
-        this.valordasParcelas = this.valortotaldaCompra / this.dialogm1;
+        if (this.dialogm1 <= 3) {
+          this.valordasParcelas = this.valortotaldaCompra / this.dialogm1;
+        } else {
+          this.valordasParcelas =
+            this.valortotaldaCompra / this.dialogm1 +
+            (5 / 100) * (this.valortotaldaCompra / this.dialogm1);
+        }
+
         this.qtdParcelas = this.dialogm1;
         this.dialog = false;
       }
