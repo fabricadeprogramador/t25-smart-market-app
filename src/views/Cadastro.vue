@@ -145,10 +145,10 @@ export default {
         
 
         HttpRequestUtil.salvarUsuario(usuario).then(Usuario => {
-          alert(JSON.stringify(Usuario))
+         // alert(JSON.stringify(Usuario))
           cliente.usuario = Usuario._id
 
-          alert('O CLIENTE QUE SERÁ INSERIDO É: ' + JSON.stringify(cliente))
+         // alert('O CLIENTE QUE SERÁ INSERIDO É: ' + JSON.stringify(cliente))
           this.inserirCliente(cliente);          
         });
 
@@ -160,9 +160,9 @@ export default {
     },
 
     inserirCliente(cliente){
-      alert('O cliente que chegou é: ' + JSON.stringify(cliente))
+      //alert('O cliente que chegou é: ' + JSON.stringify(cliente))
       HttpRequestUtil.salvarCliente(cliente).then(cadCliente => {
-        localStorage.setItem("clienteLogado", JSON.stringify(cadCliente[0]));
+        localStorage.setItem("clienteLogado", JSON.stringify(cadCliente));
           window.location.pathname = '/'
       });
 
