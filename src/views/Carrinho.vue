@@ -68,7 +68,7 @@
     <div class="text-center">
       <v-list-item-title class="title">
         Valor total do carrinho :
-        <v-list-item-title>R$: {{valortotaldoCarrinho}}</v-list-item-title>
+        <v-list-item-title>R$: {{valortotaldoCarrinho}},00</v-list-item-title>
       </v-list-item-title>
     </div>
     <div class="my-7 text-center">
@@ -86,45 +86,7 @@ export default {
     produtoExcluido: null,
     valortotaldoCarrinho: 0,
 
-    carrinho: [
-      {
-        _id: "5db243494a682b23f094f560",
-        disponivel: false,
-        nome: "Produto 11",
-        marca: "Marca1",
-        valor: 110,
-        quantidade: 17,
-        imagem:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV23Gum3ATjspEkv4XtItsLEkLckfECVmYUo0w_v14oP-7uoQ58w&s",
-        validade: "10-24-2019",
-        __v: 0,
-        descricao: "descricao",
-        setor: {
-          _id: "5db249855257c64228c09e2f",
-          ativo: true,
-          name: "Frios"
-        }
-      },
-
-      {
-        _id: "5db243494a682b23f094f561",
-        disponivel: false,
-        nome: "Produto 11",
-        marca: "Marca1",
-        valor: 120,
-        quantidade: 10,
-        imagem:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV23Gum3ATjspEkv4XtItsLEkLckfECVmYUo0w_v14oP-7uoQ58w&s",
-        validade: "10-24-2019",
-        __v: 0,
-        descricao: "mamão",
-        setor: {
-          _id: "5db249855257c64228c09e2g",
-          ativo: true,
-          name: "Frios"
-        }
-      }
-    ]
+    carrinho: []
   }),
 
   methods: {
@@ -137,7 +99,7 @@ export default {
       if (localStorage.getItem("clienteLogado") != null) {
         this.$router.push("/pagamento");
       } else {
-        this.$router.push("/");
+        this.$router.push("/login");
       }
     },
 
@@ -154,6 +116,15 @@ export default {
             localStorage.setItem("carrinho", JSON.stringify(this.carrinho));
             this.produtoExcluido = null;
             this.dialog = false;
+
+            if (this.carrinho.length == 0) {
+              this.valortotaldoCarrinho = 0;
+            } else {
+              this.valortotaldoCarrinho = 0;
+              for (let i = 0; i < this.carrinho.length; i++) {
+                this.valortotaldoCarrinho += parseFloat(this.carrinho[i].valor);
+              }
+            }
           }
         }
       }

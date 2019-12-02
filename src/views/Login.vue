@@ -74,7 +74,7 @@ export default {
         usuario.usuario = idusuario;
 
 
-        HttpRequestUtil.buscaClientePorUsuario(usuario).then(clienteAut => {
+        HttpRequestUtil.buscarClientePorUsuario(usuario).then(clienteAut => {
          
           localStorage.setItem("clienteLogado", JSON.stringify(clienteAut[0]));
           
