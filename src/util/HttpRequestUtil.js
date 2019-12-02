@@ -46,7 +46,7 @@ export default {
       .then(response => response.data);
   },
 
-  async buscarClientePorUsuario(usuario) {
+  async buscaClientePorUsuario(usuario) {
     return axios
       .post(API_URL + "/clientes/usuario", usuario)
       .then(response => response.data);
