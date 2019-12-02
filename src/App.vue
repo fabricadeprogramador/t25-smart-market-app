@@ -73,11 +73,6 @@ export default {
       },
 
       {
-        title: "Produtos",
-        icon: "mdi-basket",
-        route: "/produtos"
-      },
-      {
         title: "Contato",
         icon: "mdi-comment-account",
         route: "/contato"

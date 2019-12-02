@@ -7,10 +7,7 @@
         close-text="Close Alert"
         color="info"
         :top="y === 'top'"
-      >
-        PARABÉNS, SUA COMPRA FOI FINALIZADA! EM BREVE CHEGARÁ NO LOCAL DE ENTREGA. OBRIGADO POR COMPRAR COM O SMART MARKET!
-        <v-btn dark text @click="compraEfetuada = false">Fechar</v-btn>
-      </v-snackbar>
+      >PARABÉNS, SUA COMPRA FOI FINALIZADA! EM BREVE CHEGARÁ NO LOCAL DE ENTREGA. OBRIGADO POR COMPRAR COM O SMART MARKET!</v-snackbar>
     </div>
     <v-row align="center">
       <v-col class="mx-auto" cols="12" sm="6">
@@ -43,7 +40,7 @@
               <v-dialog v-model="dialog1" hide-overlay persistent width="300" v-if="selecPagamento">
                 <v-card color="primary" dark>
                   <v-card-text>
-                    Por favor, aguarde...
+                    Por favor, aguarde alguns segundos e te redicionaremos à pagina inicial do aplicativo...
                     <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
                   </v-card-text>
                 </v-card>
@@ -119,7 +116,14 @@ export default {
     dialog1(val) {
       if (!val) return;
 
-      setTimeout(() => (this.dialog1 = false), 4000);
+      setTimeout(
+        () => (
+          (this.dialog1 = false),
+          (this.compraEfetuada = true),
+          this.$router.push("/")
+        ),
+        8000
+      );
     }
   },
 
@@ -137,6 +141,10 @@ export default {
       }
     },
 
+    atualizarEstoque(compraNova) {
+      HttpRequestUtil.atualizarQuantidade(compraNova).then(response => {});
+    },
+
     selecPagamento() {
       let produto = JSON.parse(localStorage.getItem("carrinho"));
       let cliente = JSON.parse(localStorage.getItem("clienteLogado"));
@@ -144,7 +152,6 @@ export default {
         this.alertaPag = true;
       } else {
         this.alertaPag = false;
-        this.dialog1 = true;
 
         let compraNova = {};
 
@@ -158,8 +165,8 @@ export default {
 
         HttpRequestUtil.salvarCompras(compraNova).then(compraRetornada => {
           localStorage.setItem("carrinho", JSON.stringify(this.carrinho));
-
-          this.$router.push("/");
+          // this.atualizarEstoque();
+          this.dialog1 = true;
         });
       }
     }
