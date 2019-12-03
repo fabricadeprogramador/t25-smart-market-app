@@ -8,8 +8,6 @@
     <template v-for="(item) in items">
       <v-list-item :key="item.cliente">
         <v-list-item-content>
-       
-          
           <v-container fluid>
             <v-row>
               <v-col cols="10">
@@ -34,15 +32,10 @@
                 <v-list-item-title class="title ml-3 mr-5">Resposta:</v-list-item-title>
                 <v-list-item-subtitle v-text="item.resposta"></v-list-item-subtitle>
               </v-col>
-
-           
-
             </v-row>
           </v-container>
         </v-list-item-content>
       </v-list-item>
-
-    
     </template>
   </v-list-item-group>
 </template>
@@ -52,11 +45,13 @@ import HttpRequestUtil from "@/util/HttpRequestUtil";
 export default {
   data: () => ({
     item: 1,
-      items: [
-        { text: 'Real-Time', icon: 'mdi-clock' },
-        { text: 'Audience', icon: 'mdi-account' },
-        { text: 'Conversions', icon: 'mdi-flag' },
-      ],
+    items: [
+      { text: "Real-Time", icon: "mdi-clock" },
+      { text: "Audience", icon: "mdi-account" },
+      { text: "Conversions", icon: "mdi-flag" }
+    ],
+    y: "center",
+    salvo: false
   }),
   methods: {},
   mounted() {

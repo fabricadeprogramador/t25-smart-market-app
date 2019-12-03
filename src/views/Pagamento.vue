@@ -7,10 +7,7 @@
         close-text="Close Alert"
         color="info"
         :top="y === 'top'"
-      >
-        PARABÉNS, SUA COMPRA FOI FINALIZADA! EM BREVE CHEGARÁ NO LOCAL DE ENTREGA. OBRIGADO POR COMPRAR COM O SMART MARKET!
-        <v-btn dark text @click="compraEfetuada = false">Fechar</v-btn>
-      </v-snackbar>
+      >PARABÉNS, SUA COMPRA FOI FINALIZADA! EM BREVE CHEGARÁ NO LOCAL DE ENTREGA. OBRIGADO POR COMPRAR COM O SMART MARKET!</v-snackbar>
     </div>
     <v-row align="center">
       <v-col class="mx-auto" cols="12" sm="6">
@@ -18,7 +15,7 @@
         <v-list>
           <v-list-item-title class="title">
             Valor total da compra :
-            <v-list-item-title>R$: {{valortotaldaCompra}}</v-list-item-title>
+            <v-list-item-title>R$: {{valortotaldaCompra}},00</v-list-item-title>
           </v-list-item-title>
 
           <v-list-item-title class="title" v-if="formadepagamento == 'Cartão de Crédito'">
@@ -43,7 +40,7 @@
               <v-dialog v-model="dialog1" hide-overlay persistent width="300" v-if="selecPagamento">
                 <v-card color="primary" dark>
                   <v-card-text>
-                    Por favor, aguarde...
+                    Por favor, aguarde alguns segundos e te redicionaremos à pagina inicial do aplicativo...
                     <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
                   </v-card-text>
                 </v-card>
@@ -60,7 +57,11 @@
               max-width="350px"
             >
               <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on">Parcelas</v-btn>
+                <v-btn
+                  color="primary"
+                  dark
+                  v-on="on"
+                >Selecione o Número de Parcelas (Até 3x sem juros)</v-btn>
               </template>
               <v-card>
                 <v-card-title>Selecione o Número de Parcelas</v-card-title>
@@ -119,7 +120,14 @@ export default {
     dialog1(val) {
       if (!val) return;
 
-      setTimeout(() => (this.dialog1 = false), 4000);
+      setTimeout(
+        () => (
+          (this.dialog1 = false),
+          (this.compraEfetuada = true),
+          this.$router.push("/")
+        ),
+        8000
+      );
     }
   },
 
@@ -131,10 +139,21 @@ export default {
 
     calcularParcelas() {
       if (this.formadepagamento == "Cartão de Crédito" && this.dialogm1 > 0) {
-        this.valordasParcelas = this.valortotaldaCompra / this.dialogm1;
+        if (this.dialogm1 <= 3) {
+          this.valordasParcelas = this.valortotaldaCompra / this.dialogm1;
+        } else {
+          this.valordasParcelas =
+            this.valortotaldaCompra / this.dialogm1 +
+            (5 / 100) * (this.valortotaldaCompra / this.dialogm1);
+        }
+
         this.qtdParcelas = this.dialogm1;
         this.dialog = false;
       }
+    },
+
+    atualizarEstoque(compraNova) {
+      HttpRequestUtil.atualizarQuantidade(compraNova).then(response => {});
     },
 
     selecPagamento() {
@@ -144,7 +163,6 @@ export default {
         this.alertaPag = true;
       } else {
         this.alertaPag = false;
-        this.dialog1 = true;
 
         let compraNova = {};
 
@@ -158,8 +176,8 @@ export default {
 
         HttpRequestUtil.salvarCompras(compraNova).then(compraRetornada => {
           localStorage.setItem("carrinho", JSON.stringify(this.carrinho));
-
-          this.$router.push("/");
+          // this.atualizarEstoque();
+          this.dialog1 = true;
         });
       }
     }

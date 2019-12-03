@@ -26,6 +26,11 @@ export default {
     return axios.post(API_URL + "/produtos/setor", setor).then(produtos => produtos.data);
   },
 
+  // async atualizarQuantidade(compraNova) {
+  //   return axios.put(API_URL + "/produtos", compraNova).then(produto => produto.data)
+
+  // },
+
   //Compras
   async salvarCompras(compra) {
     return axios.post(API_URL + "/compras", compra).then(compra => compra.data);
@@ -41,7 +46,7 @@ export default {
       .then(response => response.data);
   },
 
-  async buscarClientePorUsuario(usuario) {
+  async buscaClientePorUsuario(usuario) {
     return axios
       .post(API_URL + "/clientes/usuario", usuario)
       .then(response => response.data);

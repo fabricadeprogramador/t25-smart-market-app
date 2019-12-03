@@ -55,11 +55,7 @@ export default {
     logado: false,
     rota: window.location.pathname,
     items: [
-      {
-        title: "Meus Dados",
-        icon: "mdi-apps-box",
-        route: "/cadastro"
-      },
+      
       {
         title: "Setores",
         icon: "mdi-apps-box",
@@ -73,20 +69,19 @@ export default {
       },
 
       {
-        title: "Produtos",
-        icon: "mdi-basket",
-        route: "/produtos"
-      },
-      {
         title: "Contato",
         icon: "mdi-comment-account",
         route: "/contato"
       },
-
       {
         title: "Mensagem",
         icon: "mdi-comment",
         route: "/mensagem"
+      },
+      {
+        title: "Meus Dados",
+        icon: "mdi-account-plus",
+        route: "/cadastro"
       }
     ]
   }),

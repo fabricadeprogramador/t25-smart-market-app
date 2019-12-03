@@ -153,22 +153,25 @@ export default {
         cliente.cidade = this.cidade;
         cliente.uf = this.uf;
         cliente.complemento = this.complemento;
+        cliente.ativo = true
 
         HttpRequestUtil.salvarUsuario(usuario).then(Usuario => {
-          salvo = true
-          cliente.usuario = Usuario[0]._id;
-          this.salvarCliente(cliente);
+         // alert(JSON.stringify(Usuario))
+          cliente.usuario = Usuario._id
+
+         // alert('O CLIENTE QUE SERÁ INSERIDO É: ' + JSON.stringify(cliente))
+          this.inserirCliente(cliente);          
         });
       } else {
         this.naoCadastrado = true;
       }
     },
 
-    salvarCliente(cliente) {
-      alert(JSON.stringify(cliente));
+    inserirCliente(cliente){
+      //alert('O cliente que chegou é: ' + JSON.stringify(cliente))
       HttpRequestUtil.salvarCliente(cliente).then(cadCliente => {
-        localStorage.setItem("clienteLogado", JSON.stringify(cadCliente[0]));
-        window.location.pathname = "/";
+        localStorage.setItem("clienteLogado", JSON.stringify(cadCliente));
+          window.location.pathname = '/'
       });
     },
 
@@ -198,7 +201,6 @@ export default {
       let cliente = {};
 
       cliente = JSON.parse(localStorage.getItem("clienteLogado"));
-
       this.cpf = cliente.cpf;
       this.rg = cliente.rg;
       this.nome = cliente.nome;
