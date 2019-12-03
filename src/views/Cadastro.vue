@@ -3,13 +3,13 @@
     <div>
       <v-snackbar
         type="info"
-        v-model="salvo"
+        v-model="naoCadastrado"
         close-text="Close Alert"
         color="red"
         :top="y === 'top'"
       >
         Os campos CPF, RG, NOME, TELEFONE e E-MAIL são obrigatórios!
-        <v-btn dark text @click="salvo = false">Fechar</v-btn>
+        <v-btn dark text @click="naoCadastrado = false">Fechar</v-btn>
       </v-snackbar>
     </div>
     <div>
@@ -41,7 +41,7 @@
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-text-field v-model="nome" label="Nome" required></v-text-field>
+            <v-text-field v-model="nome" label="Nome *" :rules="nameRules" :counter="20" required></v-text-field>
           </v-col>
 
           <v-col cols="12" md="2">
@@ -49,19 +49,40 @@
           </v-col>
 
           <v-col cols="12" md="2">
-            <v-text-field v-model="cpf" label="CPF" required></v-text-field>
+            <v-text-field
+              v-model="cpf"
+              label="CPF *"
+              type="number"
+              :rules="cpfRules"
+              :counter="11"
+              required
+            ></v-text-field>
           </v-col>
 
           <v-col cols="12" md="2">
-            <v-text-field v-model="rg" label="RG" required></v-text-field>
+            <v-text-field
+              v-model="rg"
+              label="RG *"
+              type="number"
+              :rules="rgRules"
+              :counter="7"
+              required
+            ></v-text-field>
           </v-col>
 
           <v-col cols="12" md="2">
-            <v-text-field v-model="telefone" label="Telefone" required></v-text-field>
+            <v-text-field
+              v-model="telefone"
+              label="Telefone *"
+              type="tel"
+              :rules="telRules"
+              :counter="11"
+              required
+            ></v-text-field>
           </v-col>
 
           <v-col cols="12" md="6">
-            <v-text-field v-model="email" label="E-mail" required></v-text-field>
+            <v-text-field v-model="email" label="E-mail *" type="email" required></v-text-field>
           </v-col>
 
           <v-col cols="12" md="3">
@@ -126,7 +147,23 @@ export default {
     ],
     salvo: false,
     naoCadastrado: false,
-    y: "top"
+    y: "top",
+    nameRules: [
+      v => !!v || "Nome é obrigatório!",
+      v => v.length <= 20 || "O nome deve ter até 20 caracteres"
+    ],
+    cpfRules: [
+      v => !!v || "CPF é obrigatório!",
+      v => v.length <= 11 || "O CPF deve ter 11 digitos"
+    ],
+    rgRules: [
+      v => !!v || "RG é obrigatório!",
+      v => v.length <= 7 || "O RG deve ter 7 digitos"
+    ],
+    telRules: [
+      v => !!v || "Telefone é obrigatório!",
+      v => v.length <= 11 || "O Telefone deve até 11 digitos"
+    ]
   }),
   methods: {
     salvar() {
@@ -140,9 +177,9 @@ export default {
         usuario.ativo = true;
 
         let cliente = {};
-        cliente.cpf = this.cpf;
         cliente.rg = this.rg;
         cliente.nome = this.nome;
+        cliente.cpf = this.cpf;
         cliente.telefone = this.telefone;
         cliente.sexo = this.sexo;
         cliente.email = this.email;
@@ -153,32 +190,33 @@ export default {
         cliente.cidade = this.cidade;
         cliente.uf = this.uf;
         cliente.complemento = this.complemento;
-        cliente.ativo = true
+        cliente.ativo = true;
 
         HttpRequestUtil.salvarUsuario(usuario).then(Usuario => {
-         // alert(JSON.stringify(Usuario))
-          cliente.usuario = Usuario._id
+          // alert(JSON.stringify(Usuario))
+          cliente.usuario = Usuario._id;
 
-         // alert('O CLIENTE QUE SERÁ INSERIDO É: ' + JSON.stringify(cliente))
-          this.inserirCliente(cliente);          
+          // alert('O CLIENTE QUE SERÁ INSERIDO É: ' + JSON.stringify(cliente))
+          this.inserirCliente(cliente);
+          this.salvo = true;
         });
       } else {
         this.naoCadastrado = true;
       }
     },
 
-    inserirCliente(cliente){
+    inserirCliente(cliente) {
       //alert('O cliente que chegou é: ' + JSON.stringify(cliente))
       HttpRequestUtil.salvarCliente(cliente).then(cadCliente => {
         localStorage.setItem("clienteLogado", JSON.stringify(cadCliente));
-          window.location.pathname = '/'
+        window.location.pathname = "/";
       });
     },
 
     limparCampos() {
-      this.cpf = "";
       this.rg = "";
       this.nome = "";
+      this.cpf = "";
       this.telefone = "";
       this.sexo = "";
       this.email = "";
@@ -201,9 +239,9 @@ export default {
       let cliente = {};
 
       cliente = JSON.parse(localStorage.getItem("clienteLogado"));
-      this.cpf = cliente.cpf;
       this.rg = cliente.rg;
       this.nome = cliente.nome;
+      this.cpf = cliente.cpf;
       this.telefone = cliente.telefone;
       this.sexo = cliente.sexo;
       this.email = cliente.email;
