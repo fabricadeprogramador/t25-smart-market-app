@@ -5,6 +5,18 @@
         type="info"
         v-model="salvo"
         close-text="Close Alert"
+        color="red"
+        :top="y === 'top'"
+      >
+        Os campos CPF, RG, NOME, TELEFONE e E-MAIL são obrigatórios!
+        <v-btn dark text @click="salvo = false">Fechar</v-btn>
+      </v-snackbar>
+    </div>
+    <div>
+      <v-snackbar
+        type="info"
+        v-model="salvo"
+        close-text="Close Alert"
         color="info"
         :top="y === 'top'"
       >
@@ -113,6 +125,7 @@ export default {
       { text: "Outro", value: "O" }
     ],
     salvo: false,
+    naoCadastrado: false,
     y: "top"
   }),
   methods: {
@@ -126,7 +139,7 @@ export default {
         usuario.tipo = "CLIENTE";
         usuario.ativo = true;
 
-      let cliente = {};
+        let cliente = {};
         cliente.cpf = this.cpf;
         cliente.rg = this.rg;
         cliente.nome = this.nome;
@@ -141,30 +154,23 @@ export default {
         cliente.uf = this.uf;
         cliente.complemento = this.complemento;
 
-        
-
         HttpRequestUtil.salvarUsuario(usuario).then(Usuario => {
-          cliente.usuario = Usuario[0]._id
-          this.salvarCliente(cliente);          
+          salvo = true
+          cliente.usuario = Usuario[0]._id;
+          this.salvarCliente(cliente);
         });
-
-        
-       
-      }else{
-        alert("Os campos CPF, RG, NOME, TELEFONE e E-MAIL são obrigatórios.")
+      } else {
+        this.naoCadastrado = true;
       }
     },
 
-    salvarCliente(cliente){
-      alert(JSON.stringify(cliente))
+    salvarCliente(cliente) {
+      alert(JSON.stringify(cliente));
       HttpRequestUtil.salvarCliente(cliente).then(cadCliente => {
         localStorage.setItem("clienteLogado", JSON.stringify(cadCliente[0]));
-          window.location.pathname = '/'
+        window.location.pathname = "/";
       });
-
-
     },
-
 
     limparCampos() {
       this.cpf = "";
@@ -216,7 +222,7 @@ export default {
         this.nome == "" ||
         this.telefone == "" ||
         this.email == ""
-         ) {
+      ) {
         return false;
       }
       return true;
